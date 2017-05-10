@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ReparacionVehiculos" targetNamespace="http://www.example.org/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/">
+      <xsd:element name="comprobarStock">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tipoPieza" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="comprobarStockResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="mensaje" type="xsd:string" />
+          	<xsd:element name="hayStock" type="xsd:boolean"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="generarPresupuesto">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="tipoReparacion" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="generarPresupuestoResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="tipoReparacion"
+      				type="xsd:string">
+      			</xsd:element>
+      			<xsd:element name="tiempo" type="xsd:string"></xsd:element>
+      			<xsd:element name="precio" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="actualizarStock">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="idPieza" type="xsd:string"></xsd:element>
+      			<xsd:element name="cantidad" type="xsd:int"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="actualizarStockResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="generarFactura">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="generarFacturaResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="realizarPedido">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="idPieza" type="xsd:string"></xsd:element>
+      			<xsd:element name="cantidad" type="xsd:int"></xsd:element>
+      			<xsd:element name="idCliente" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="realizarPedidoResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="comprobarStockRequest">
+    <wsdl:part element="tns:comprobarStock" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="comprobarStockResponse">
+    <wsdl:part element="tns:comprobarStockResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="generarPresupuestoRequest">
+  	<wsdl:part name="parameters" element="tns:generarPresupuesto"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarPresupuestoResponse">
+  	<wsdl:part name="parameters" element="tns:generarPresupuestoResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarStockRequest">
+  	<wsdl:part name="parameters" element="tns:actualizarStock"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarStockResponse">
+  	<wsdl:part name="parameters" element="tns:actualizarStockResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarFacturaRequest">
+  	<wsdl:part name="parameters" element="tns:generarFactura"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarFacturaResponse">
+  	<wsdl:part name="parameters" element="tns:generarFacturaResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="realizarPedidoRequest">
+  	<wsdl:part name="parameters" element="tns:realizarPedido"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="realizarPedidoResponse">
+  	<wsdl:part name="parameters" element="tns:realizarPedidoResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ReparacionVehiculos">
+    <wsdl:operation name="comprobarStock">
+      <wsdl:input message="tns:comprobarStockRequest"/>
+      <wsdl:output message="tns:comprobarStockResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="generarPresupuesto">
+    	<wsdl:input message="tns:generarPresupuestoRequest"></wsdl:input>
+    	<wsdl:output message="tns:generarPresupuestoResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarStock">
+    	<wsdl:input message="tns:actualizarStockRequest"></wsdl:input>
+    	<wsdl:output message="tns:actualizarStockResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="realizarPedido">
+    	<wsdl:input message="tns:realizarPedidoRequest"></wsdl:input>
+    	<wsdl:output message="tns:realizarPedidoResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReparacionVehiculosSOAP" type="tns:ReparacionVehiculos">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="comprobarStock">
+      <soap:operation soapAction="http://www.example.org/comprobarStock"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReparacionVehiculos">
+    <wsdl:port binding="tns:ReparacionVehiculosSOAP" name="ReparacionVehiculosSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
