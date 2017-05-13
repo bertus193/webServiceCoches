@@ -11,8 +11,12 @@ var framework = {
     return require('./paths');
   },
   
-  getVentas(){
-    return require('./ventas');
+  getFranquicia(){
+    return require('./franquicia');
+  },
+
+  getProveedor(){
+    return require('./proveedor')
   }
   
 }

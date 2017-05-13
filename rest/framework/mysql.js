@@ -24,6 +24,28 @@ var mysql = {
   getFranquicia(){
     this.con.query("use " +  config.bd_franquicia + ";");
   },
+
+  getProveedorVehiculos(num){
+    switch(num){
+      case 2:
+        this.con.query("use " +  config.bd_proveedorv2 + ";")
+        break
+      default:
+        this.con.query("use " +  config.bd_proveedorv1 + ";")
+        break
+    }
+  },
+
+  getProveedorPiezas(num){
+    switch(num){
+      case 2:
+        this.con.query("use " +  config.bd_proveedorp2 + ";")
+        break
+      default:
+        this.con.query("use " +  config.bd_proveedorp1 + ";")
+        break
+    }
+  },
   
   end(){
       this.con.end(function(err) {
