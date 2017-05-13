@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/AlquilerVehiculos/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AlquilerVehiculos" targetNamespace="http://www.example.org/AlquilerVehiculos/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/AlquilerVehiculos/">
+      <xsd:element name="ObtenerVehiculos">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="tipoVehiculo" type="xsd:string" />
+          	<xsd:element name="marca" type="xsd:string"></xsd:element>
+          	<xsd:element name="disponibilidad" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObtenerVehiculosResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="idVehiculo" type="xsd:string" />
+          	<xsd:element name="tipoVehiculo" type="xsd:string"></xsd:element>
+          	<xsd:element name="marca" type="xsd:string"></xsd:element>
+          	<xsd:element name="cantidad" type="xsd:int"></xsd:element>
+          	<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AsignarVehiculos">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="idCliente" type="xsd:string"></xsd:element>
+      			<xsd:element name="idVehiculo" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AsignarVehiculosResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+      			<xsd:element name="asignado" type="xsd:boolean"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerVehiculosRequest">
+    <wsdl:part element="tns:ObtenerVehiculos" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ObtenerVehiculosResponse">
+    <wsdl:part element="tns:ObtenerVehiculosResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AsignarVehiculosRequest">
+  	<wsdl:part name="parameters" element="tns:AsignarVehiculos"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AsignarVehiculosResponse">
+  	<wsdl:part name="parameters" element="tns:AsignarVehiculosResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AlquilerVehiculos">
+    <wsdl:operation name="ObtenerVehiculos">
+      <wsdl:input message="tns:ObtenerVehiculosRequest"/>
+      <wsdl:output message="tns:ObtenerVehiculosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="AsignarVehiculos">
+    	<wsdl:input message="tns:AsignarVehiculosRequest"></wsdl:input>
+    	<wsdl:output message="tns:AsignarVehiculosResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AlquilerVehiculosSOAP" type="tns:AlquilerVehiculos">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ObtenerVehiculos">
+      <soap:operation soapAction="http://www.example.org/AlquilerVehiculos/ObtenerVehiculos"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AlquilerVehiculos">
+    <wsdl:port binding="tns:AlquilerVehiculosSOAP" name="AlquilerVehiculosSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
