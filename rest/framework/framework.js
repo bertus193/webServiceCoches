@@ -1,24 +1,24 @@
 var express = require('express')
 
 var framework = {
-  app : express(),
-  
-  getMysql(){
+  app: express(),
+
+  getMysql() {
     return require('./mysql');
   },
-  
-  getPaths(){
+
+  getPaths() {
     return require('./paths');
   },
-  
-  getFranquicia(){
+
+  getFranquicia() {
     return require('./franquicia');
   },
 
-  getProveedor(){
+  getProveedor() {
     return require('./proveedor')
   }
-  
+
 }
- 
+
 module.exports = framework;

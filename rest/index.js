@@ -4,7 +4,7 @@ framework.getMysql().connect();
 
 var app = framework.getPaths();
 
-app.listen(3000,function(){
+app.listen(3000, function () {
 	console.log('Marchando el servidor...')
 
 })
