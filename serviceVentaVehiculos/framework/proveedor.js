@@ -2,10 +2,10 @@ var framework = require('./framework');
 
 var proveedor = {
 
-    getPresupuestoVehiculo(num, marca, modelo, callback) {
+    getPresupuestoVehiculo(numProveedor, marca, modelo, callback) {
         var con = framework.getMysql().getCon();
-        framework.getMysql().getProveedorVehiculos(num);
-        con.query('SELECT precio FROM vehiculo WHERE marca = "' + marca + '" AND modelo = "' + modelo + '"', function (err, rows) {
+        framework.getMysql().getProveedorVehiculos(numProveedor);
+        con.query('SELECT * FROM vehiculo WHERE marca = "' + marca + '" AND modelo = "' + modelo + '"', function (err, rows) {
             if (err)
                 callback(err);
             callback(undefined, rows);
