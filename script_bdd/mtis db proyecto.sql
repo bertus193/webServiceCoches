@@ -73,10 +73,13 @@ CREATE TABLE `factura` (
 
 CREATE TABLE `linea_factura` (
   `id` int(11) NOT NULL,
-  `idproducto` int(11) NOT NULL,
+  `idFactura` int(11) NOT NULL,
+  `idproducto` varchar(16) NOT NULL DEFAULT '',
   `cantidad` int(11) NOT NULL,
-  `total_linea` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+  `total_linea` decimal(16,2) DEFAULT NULL,
+  `tipo` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -314,6 +317,12 @@ INSERT INTO pieza VALUES(2,'Tornillos',0.75, 2000);
 INSERT INTO pieza VALUES(3,'Ruedas',250, 120);
 INSERT INTO pieza VALUES(4,'Pastillas de freno',12.76, 100);
 INSERT INTO pieza VALUES(5,'Tubo de escape',90.50, 50);
+
+INSERT INTO `factura` (`id`, `idcliente`, `tipo`, `fecha`) VALUES (1, 1, 'factura', '2017-05-16 14:01:36');
+INSERT INTO `linea_factura` (`id`, `idFactura`, `idproducto`, `cantidad`, `total_linea`, `tipo`)
+VALUES (1, 1, '1', 2, 101.00, 'pieza'), (2, 1, '2', 1, 17652.52, 'vehiculo');
+
+
 
 USE proveedorp1;
 INSERT INTO pieza VALUES(1,'Bujias',50.50, 200);
