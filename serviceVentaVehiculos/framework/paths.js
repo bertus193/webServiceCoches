@@ -69,12 +69,12 @@ app.post('/stock', function (req, res) {
 
 //GENERA FACTURA (PUT)
 app.get('/factura', function (req, res) {
-	res.render('./views/factura.ejs', { user: 'test' })
-	/*
-	res.pdfFromHTML({
-		filename: 'generated.pdf',
-		htmlContent: fs.readFileSync('./views/factura.ejs', 'utf8')
-	});*/
+	res.render('../views/factura.ejs', { numeroFactura: 'nose' }, function (err, output) {
+		res.pdfFromHTML({
+			filename: 'generated.pdf',
+			htmlContent: output
+		})
+	});
 })
 
 app.get('*', function (pet, res) {
