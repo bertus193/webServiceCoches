@@ -5,12 +5,14 @@ var framework = require('./framework')
 var app = framework.app;
 var fs = framework.fs;
 var path = framework.path;
+var pdf = require('express-pdf');
 
 //HTML CON PARAMETROS -> RENDER
 app.set('view engine', 'ejs');
 
 app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
+app.use(pdf)
 
 app.get('/stock', function (req, res) {
 	var marca = req.query.marca
@@ -67,7 +69,10 @@ app.post('/stock', function (req, res) {
 
 //GENERA FACTURA
 app.put('/factura', function (req, res) {
-	res.send("to-do")
+	res.pdfFromHTML({
+		filename: 'generated.pdf',
+		htmlContent: '<html><body>ASDF</body></html>'
+	});
 })
 
 app.get('*', function (pet, res) {
