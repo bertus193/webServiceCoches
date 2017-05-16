@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `franquicia`
 --
-CREATE DATABASE IF NOT EXISTS `franquicia` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `franquicia` DEFAULT CHARACTER SET UTF8;
 USE `franquicia`;
 
 -- --------------------------------------------------------
@@ -30,11 +30,11 @@ USE `franquicia`;
 
 CREATE TABLE `alquiler` (
   `id` int(11) NOT NULL,
-  `idcliente` int(11) NOT NULL,
+  `idcliente` varchar(30) NOT NULL,
   `idvehiculo` int(11) NOT NULL,
   `fechaini` date NOT NULL,
   `fechafin` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
 
@@ -43,13 +43,13 @@ CREATE TABLE `alquiler` (
 --
 
 CREATE TABLE `cliente` (
-  `id` int(11) NOT NULL,
+  `id` varchar(30) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `telefono` int(11) NOT NULL,
   `email` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE `factura` (
   `id` int(11) NOT NULL,
   `idcliente` int(11) NOT NULL,
   `tipo` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,7 @@ CREATE TABLE `linea_factura` (
   `idproducto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `total_linea` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
 
@@ -84,10 +84,10 @@ CREATE TABLE `linea_factura` (
 
 CREATE TABLE `pieza` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(150) NOT NULL,
-  `precio` float NOT NULL,
+  `nombre` varchar(150) NOT NULL DEFAULT '',
+  `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
 
@@ -100,10 +100,10 @@ CREATE TABLE `vehiculo` (
   `marca` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `color` varchar(50) NOT NULL,
-  `precio` float NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `disponibilidad` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `disponibilidad` varchar(15) NOT NULL DEFAULT 00 COMMENT 'venta, alquiler, alquilado'
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Índices para tablas volcadas
@@ -176,7 +176,7 @@ ALTER TABLE `vehiculo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;--
 -- Base de datos: `proveedorp1`
 --
-CREATE DATABASE IF NOT EXISTS `proveedorp1` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `proveedorp1` DEFAULT CHARACTER SET UTF8;
 USE `proveedorp1`;
 
 -- --------------------------------------------------------
@@ -188,9 +188,9 @@ USE `proveedorp1`;
 CREATE TABLE `pieza` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `precio` float NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Índices para tablas volcadas
@@ -204,7 +204,7 @@ ALTER TABLE `pieza`
 --
 -- Base de datos: `proveedorp2`
 --
-CREATE DATABASE IF NOT EXISTS `proveedorp2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `proveedorp2` DEFAULT CHARACTER SET UTF8;
 USE `proveedorp2`;
 
 -- --------------------------------------------------------
@@ -216,9 +216,9 @@ USE `proveedorp2`;
 CREATE TABLE `pieza` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `precio` float NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Índices para tablas volcadas
@@ -232,7 +232,7 @@ ALTER TABLE `pieza`
 --
 -- Base de datos: `proveedorv1`
 --
-CREATE DATABASE IF NOT EXISTS `proveedorv1` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `proveedorv1` DEFAULT CHARACTER SET UTF8;
 USE `proveedorv1`;
 
 -- --------------------------------------------------------
@@ -246,10 +246,10 @@ CREATE TABLE `vehiculo` (
   `marca` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `color` varchar(50) NOT NULL,
-  `precio` float NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `disponibilidad` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Índices para tablas volcadas
@@ -263,7 +263,7 @@ ALTER TABLE `vehiculo`
 --
 -- Base de datos: `proveedorv2`
 --
-CREATE DATABASE IF NOT EXISTS `proveedorv2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `proveedorv2` DEFAULT CHARACTER SET UTF8;
 USE `proveedorv2`;
 
 -- --------------------------------------------------------
@@ -277,10 +277,10 @@ CREATE TABLE `vehiculo` (
   `marca` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `color` varchar(50) NOT NULL,
-  `precio` float NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `disponibilidad` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Índices para tablas volcadas
@@ -295,3 +295,49 @@ ALTER TABLE `vehiculo`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+/*  DATOS POR DEFECTO */
+USE franquicia;
+INSERT INTO vehiculo VALUES(1,'Toyota','Minolta','plata',250689.52,5,'Venta');
+INSERT INTO vehiculo VALUES(2,'Subaru','Impreza','azul',17652.52,7,'Venta');
+INSERT INTO vehiculo VALUES(3,'Peugeot','208 3 Puertas','plata',10458.58,2,'Venta');
+INSERT INTO vehiculo VALUES(4,'Peugeot','208 5 Puertas','plata',10589.12,6,'Alquiler');
+INSERT INTO vehiculo VALUES(5,'Seat','Ibiza','plata',8054.36,8,'Alquiler');
+
+INSERT INTO cliente VALUES('74009198M','Paco','Garcia Perez','Calle Colon Nº12','689563214','paco@gmail.com');
+
+INSERT INTO pieza VALUES(1,'Bujias',50.50, 200);
+INSERT INTO pieza VALUES(2,'Tornillos',0.75, 2000);
+INSERT INTO pieza VALUES(3,'Ruedas',250, 120);
+INSERT INTO pieza VALUES(4,'Pastillas de freno',12.76, 100);
+INSERT INTO pieza VALUES(5,'Tubo de escape',90.50, 50);
+
+USE proveedorp1;
+INSERT INTO pieza VALUES(1,'Bujias',50.50, 200);
+INSERT INTO pieza VALUES(2,'Tornillos',0.75, 2000);
+INSERT INTO pieza VALUES(3,'Ruedas',250, 120);
+INSERT INTO pieza VALUES(4,'Pastillas de freno',12.76, 100);
+INSERT INTO pieza VALUES(5,'Tubo de escape',90.50, 50);
+
+USE proveedorp2;
+INSERT INTO pieza VALUES(1,'Bujias',50.50, 200);
+INSERT INTO pieza VALUES(2,'Tornillos',0.75, 2000);
+INSERT INTO pieza VALUES(3,'Ruedas',250, 120);
+INSERT INTO pieza VALUES(4,'Pastillas de freno',12.76, 100);
+INSERT INTO pieza VALUES(5,'Tubo de escape',90.50, 50);
+
+
+USE proveedorv1;
+INSERT INTO vehiculo VALUES(1,'Toyota','Minolta','plata',250689.52,50,'Venta');
+INSERT INTO vehiculo VALUES(2,'Subaru','Impreza','azul',17652.52,70,'Venta');
+INSERT INTO vehiculo VALUES(3,'Peugeot','208 3 Puertas','plata',10458.58,20,'Venta');
+INSERT INTO vehiculo VALUES(4,'Peugeot','208 5 Puertas','plata',10589.12,60,'Alquiler');
+INSERT INTO vehiculo VALUES(5,'Seat','Ibiza','plata',8054.36,80,'Alquiler');
+
+USE proveedorv2;
+INSERT INTO vehiculo VALUES(1,'Toyota','Minolta','plata',305689.52,50,'Venta');
+INSERT INTO vehiculo VALUES(2,'Subaru','Impreza','azul',16859.52,70,'Venta');
+INSERT INTO vehiculo VALUES(3,'Peugeot','208 3 Puertas','plata',9685.58,20,'Venta');
+INSERT INTO vehiculo VALUES(4,'Peugeot','208 5 Puertas','plata',11689.12,60,'Alquiler');
+INSERT INTO vehiculo VALUES(5,'Seat','Ibiza','plata',9586.36,80,'Alquiler');
