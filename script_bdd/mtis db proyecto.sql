@@ -58,10 +58,12 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `factura` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idcliente` int(11) NOT NULL,
-  `tipo` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+  `tipo` varchar(25) NOT NULL,
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
