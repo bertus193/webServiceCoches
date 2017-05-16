@@ -6,6 +6,10 @@
         <parameter name="ServiceClass">org.example.www.alquilervehiculos.AlquilerVehiculosSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="AsignarVehiculos" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/AlquilerVehiculos/">
+            <actionMapping>http://www.example.org/AlquilerVehiculos/AsignarVehiculos</actionMapping>
+            <outputActionMapping>http://www.example.org/AlquilerVehiculos/AlquilerVehiculos/AsignarVehiculosResponse</outputActionMapping>
+        </operation>
         <operation name="ObtenerVehiculos" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/AlquilerVehiculos/">
             <actionMapping>http://www.example.org/AlquilerVehiculos/ObtenerVehiculos</actionMapping>
             <outputActionMapping>http://www.example.org/AlquilerVehiculos/AlquilerVehiculos/ObtenerVehiculosResponse</outputActionMapping>

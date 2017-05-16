@@ -5,41 +5,48 @@
       <xsd:element name="ObtenerVehiculos">
         <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element name="tipoVehiculo" type="xsd:string"/>
+          	<xsd:element name="modelo" type="xsd:string"/>
           	<xsd:element name="marca" type="xsd:string"/>
-          	<xsd:element name="disponibilidad" type="xsd:string"/>
+          	<xsd:element name="color" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ObtenerVehiculosResponse">
         <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element name="idVehiculo" type="xsd:string"/>
-          	<xsd:element name="tipoVehiculo" type="xsd:string"/>
-          	<xsd:element name="marca" type="xsd:string"/>
-          	<xsd:element name="cantidad" type="xsd:int"/>
-          	<xsd:element name="mensaje" type="xsd:string"/>
+          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="AsignarVehiculos">
       	<xsd:complexType>
       		<xsd:sequence>
-
-      			<xsd:element name="idCliente" type="xsd:string"/>
-      			<xsd:element name="idVehiculo" type="xsd:string"/>
+      			<xsd:element name="idCliente" type="xsd:int"/>
+      			<xsd:element name="idVehiculo" type="xsd:int"/>
+      			<xsd:element name="fechaini" type="xsd:date"/>
+      			<xsd:element name="fechafin" type="xsd:date"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
       <xsd:element name="AsignarVehiculosResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-
       			<xsd:element name="mensaje" type="xsd:string"/>
       			<xsd:element name="asignado" type="xsd:boolean"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+    
+      <xsd:complexType name="Vehiculo">
+      	<xsd:sequence>
+      		<xsd:element name="idVehiculo" type="xsd:string"/>
+      		<xsd:element name="marca" type="xsd:string"/>
+      		<xsd:element name="modelo" type="xsd:string"/>
+      		<xsd:element name="color" type="xsd:string"/>
+      		<xsd:element name="mensaje" type="xsd:string"/>
+      		<xsd:element name="precio" type="xsd:float"/>
+      	</xsd:sequence>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ObtenerVehiculosRequest">
@@ -76,6 +83,15 @@
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="ObtenerVehiculos">
       <soap:operation soapAction="http://www.example.org/AlquilerVehiculos/ObtenerVehiculos"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AsignarVehiculos">
+      <soap:operation soapAction="http://www.example.org/AlquilerVehiculos/AsignarVehiculos"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

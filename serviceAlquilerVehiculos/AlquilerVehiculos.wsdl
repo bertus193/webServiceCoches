@@ -5,41 +5,48 @@
       <xsd:element name="ObtenerVehiculos">
         <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element name="tipoVehiculo" type="xsd:string" />
+          	<xsd:element name="modelo" type="xsd:string" />
           	<xsd:element name="marca" type="xsd:string"></xsd:element>
-          	<xsd:element name="disponibilidad" type="xsd:string"></xsd:element>
+          	<xsd:element name="color" type="xsd:string"></xsd:element>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ObtenerVehiculosResponse">
         <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element name="idVehiculo" type="xsd:string" />
-          	<xsd:element name="tipoVehiculo" type="xsd:string"></xsd:element>
-          	<xsd:element name="marca" type="xsd:string"></xsd:element>
-          	<xsd:element name="cantidad" type="xsd:int"></xsd:element>
-          	<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+          	<xsd:element name="vehiculos" type="tns:Vehiculo" maxOccurs="unbounded" minOccurs="0"></xsd:element>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="AsignarVehiculos">
       	<xsd:complexType>
       		<xsd:sequence>
-
-      			<xsd:element name="idCliente" type="xsd:string"></xsd:element>
-      			<xsd:element name="idVehiculo" type="xsd:string"></xsd:element>
+      			<xsd:element name="idCliente" type="xsd:int"></xsd:element>
+      			<xsd:element name="idVehiculo" type="xsd:int"></xsd:element>
+      			<xsd:element name="fechaini" type="xsd:date"></xsd:element>
+      			<xsd:element name="fechafin" type="xsd:date"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
       <xsd:element name="AsignarVehiculosResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-
       			<xsd:element name="mensaje" type="xsd:string"></xsd:element>
       			<xsd:element name="asignado" type="xsd:boolean"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+    
+      <xsd:complexType name="Vehiculo">
+      	<xsd:sequence>
+      		<xsd:element name="idVehiculo" type="xsd:string"></xsd:element>
+      		<xsd:element name="marca" type="xsd:string"></xsd:element>
+      		<xsd:element name="modelo" type="xsd:string"></xsd:element>
+      		<xsd:element name="color" type="xsd:string"></xsd:element>
+      		<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+      		<xsd:element name="precio" type="xsd:float"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ObtenerVehiculosRequest">
@@ -64,17 +71,30 @@
     	<wsdl:output message="tns:AsignarVehiculosResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="AlquilerVehiculosSOAP" type="tns:AlquilerVehiculos">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="ObtenerVehiculos">
-      <soap:operation soapAction="http://www.example.org/AlquilerVehiculos/ObtenerVehiculos"/>
-      <wsdl:input>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
+  <wsdl:binding name="AlquilerVehiculosSOAP"
+  	type="tns:AlquilerVehiculos">
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="ObtenerVehiculos">
+  		<soap:operation
+  			soapAction="http://www.example.org/AlquilerVehiculos/ObtenerVehiculos" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="AsignarVehiculos">
+  		<soap:operation
+  			soapAction="http://www.example.org/AlquilerVehiculos/AsignarVehiculos" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="AlquilerVehiculos">
     <wsdl:port binding="tns:AlquilerVehiculosSOAP" name="AlquilerVehiculosSOAP">
