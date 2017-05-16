@@ -8,5 +8,9 @@ Proyecto de Integración Back End y Front End
 - serviceCompraPiezasProveedor
 - serviceGenerarFactura
 - serviceCliente (Jorge)
+  - listar()
+  - crear()
+  - buscar()
+
 
 - cliente (Jorge -)
