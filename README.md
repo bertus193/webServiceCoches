@@ -1,12 +1,12 @@
 # webServiceCoches
 Proyecto de Integración Back End y Front End
 
-- serviceAlquilerVehiculos
-- serviceReparacionVehiculos (BPEL)
-- serviceVentaVehiculos (REST)
+- serviceAlquilerVehiculos (Sergi)
+- serviceReparacionVehiculos (BPEL) (Mario)
+- serviceVentaVehiculos (REST) (Alberto)
 - serviceCompraVehiculosProveedor
 - serviceCompraPiezasProveedor
 - serviceGenerarFactura
-- serviceCliente
+- serviceCliente (Jorge)
 
-- cliente
+- cliente (Jorge -)
