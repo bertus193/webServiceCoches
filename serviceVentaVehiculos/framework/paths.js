@@ -6,6 +6,7 @@ var app = framework.app;
 var fs = require('fs');
 var path = framework.path;
 var pdf = require('express-pdf');
+var dateFormat = require('dateformat');
 
 //HTML CON PARAMETROS -> RENDER
 app.set('view engine', 'ejs');
@@ -69,12 +70,36 @@ app.post('/stock', function (req, res) {
 
 //GENERA FACTURA (PUT)
 app.get('/factura', function (req, res) {
-	res.render('../views/factura.ejs', { numeroFactura: 'nose' }, function (err, output) {
-		res.pdfFromHTML({
-			filename: 'generated.pdf',
-			htmlContent: output
-		})
-	});
+	var idFactura = req.query.idFactura
+
+	framework.getFranquicia().getFactura(idFactura, function (err, factura) {
+		if (err) {
+			res.send(err)
+		}
+		else if (factura == 0) {
+			res.send("No existe ningún pedido con dicha información");
+		}
+		else {
+
+			framework.getFranquicia().getFacturaProductos(idFactura, function (err, productos) {
+				if (err) {
+					res.send(err)
+				}
+				else if (productos == 0) {
+					res.send("No existe ningún pedido con dicha información");
+				}
+				else {
+					res.render('../views/factura.ejs', { idFactura: factura[0].id, productos: productos, fecha: dateFormat(Date.parse(factura[0].fecha), 'dd-mm-yyyy') }, function (err, output) {
+						res.pdfFromHTML({
+							filename: 'generated.pdf',
+							htmlContent: output
+						})
+					});
+
+				}
+			});
+		}
+	})
 })
 
 app.get('*', function (pet, res) {
@@ -82,4 +107,4 @@ app.get('*', function (pet, res) {
 	res.send('Hola soy express que tal');
 })
 
-module.exports = app;
+module.exports = app

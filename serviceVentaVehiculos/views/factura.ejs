@@ -97,8 +97,10 @@
                             </td>
 
                             <td>
-                                <%= numeroFactura %>
-                                    Invoice #: 123<br> Created: January 1, 2015<br> Due: February 1, 2015
+
+                                Factura #:
+                                <%= idFactura %><br> Creación:
+                                    <%= fecha %>
                             </td>
                         </tr>
                     </table>
@@ -120,34 +122,43 @@
                     </table>
                 </td>
             </tr>
-
+        </table>
+        <table cellpadding="0" cellspacing="0">
             <tr class="heading">
                 <td>
                     Producto
+                </td>
+                <td style="text-align: left">
+                    Cantidad
                 </td>
 
                 <td>
                     Precio
                 </td>
             </tr>
+            <%  var total = 0;
+                for (var i in productos) {%>
+                <tr class="item">
+                    <td>
+                        <%= productos[i].nombre %>
+                    </td>
+                    <td style="text-align: left">
+                        <%= productos[i].cantidad %>
+                    </td>
+                    <td>
+                        $
+                        <%= productos[i].total_linea %>
+                            <% total = total + productos[i].total_linea %>
+                    </td>
+                </tr>
+                <%}%>
 
-            <tr class="item">
-                <td>
-                    Coche1
-                </td>
-
-                <td>
-                    $300.00
-                </td>
-            </tr>
-
-            <tr class="total">
-                <td></td>
-
-                <td>
-                    Total: $385.00
-                </td>
-            </tr>
+                    <tr class="total">
+                        <td colspan="3" style="text-align: right">
+                            Total: $
+                            <%= total %>
+                        </td>
+                    </tr>
         </table>
     </div>
 </body>
