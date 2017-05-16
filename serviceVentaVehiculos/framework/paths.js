@@ -3,7 +3,7 @@ var bp = require('body-parser')
 var framework = require('./framework')
 
 var app = framework.app;
-var fs = framework.fs;
+var fs = require('fs');
 var path = framework.path;
 var pdf = require('express-pdf');
 
@@ -67,12 +67,14 @@ app.post('/stock', function (req, res) {
 	resp.send("to-do")
 })
 
-//GENERA FACTURA
-app.put('/factura', function (req, res) {
+//GENERA FACTURA (PUT)
+app.get('/factura', function (req, res) {
+	res.render('./views/factura.ejs', { user: 'test' })
+	/*
 	res.pdfFromHTML({
 		filename: 'generated.pdf',
-		htmlContent: '<html><body>ASDF</body></html>'
-	});
+		htmlContent: fs.readFileSync('./views/factura.ejs', 'utf8')
+	});*/
 })
 
 app.get('*', function (pet, res) {
