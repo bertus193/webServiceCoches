@@ -58,11 +58,10 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `factura` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `idcliente` int(11) NOT NULL,
   `tipo` varchar(25) NOT NULL,
-  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -77,8 +76,7 @@ CREATE TABLE `linea_factura` (
   `idproducto` varchar(16) NOT NULL DEFAULT '',
   `cantidad` int(11) NOT NULL,
   `total_linea` decimal(16,2) DEFAULT NULL,
-  `tipo` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `tipo` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
