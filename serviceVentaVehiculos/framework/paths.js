@@ -33,7 +33,7 @@ app.get('/stock', function (req, res) {
 	//res.render('../views/login.ejs', {user: 'test' })
 })
 
-//PRESUPUESTO A PROVEEDOR V
+//PRESUPUESTO A PROVEEDOR
 app.get('/presupuesto', function (req, res) {
 	var marca = req.query.marca
 	var modelo = req.query.modelo
@@ -53,24 +53,25 @@ app.get('/presupuesto', function (req, res) {
 
 })
 
-//PEDIDO A FRANQUICIA
-app.put('/pedidoF', function (req, res) {
+//PEDIDO A FRANQUICIA (PUT)
+app.get('/pedidoF', function (req, res) {
 	res.send("to-do")
 })
 
-//PEDIDO A PROVEEDOR
-app.put('/pedidoP', function (req, res) {
+//PEDIDO A PROVEEDOR (PUT)
+app.get('/pedidoP', function (req, res) {
 	res.send("to-do")
 })
 
-//MODIFICAR (ACTUALIZA) STOCK
-app.post('/stock', function (req, res) {
+//MODIFICAR (ACTUALIZA) STOCK (POST)
+app.get('/stock', function (req, res) {
 	resp.send("to-do")
 })
 
 //GENERA FACTURA (PUT)
-app.get('/factura', function (req, res) {
-	var idFactura = req.query.idFactura
+app.put('/factura/', function (req, res) {
+	var idFactura = req.body.idFactura
+	//console.log(req.body)
 
 	framework.getFranquicia().getFactura(idFactura, function (err, factura) {
 		if (err) {
