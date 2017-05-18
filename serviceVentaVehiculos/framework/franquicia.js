@@ -32,10 +32,10 @@ var franquicia = {
         });
     },
 
-    nuevoPedidoCliente(idCliente, callback) {
+    nuevoPedidoCliente(idCliente, tipo, callback) {
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();
-        con.query('INSERT INTO factura (idCliente, tipo) VALUES (' + idCliente + ',"venta") ', function (err, rows) {
+        con.query('INSERT INTO factura (idCliente, tipo) VALUES (' + idCliente + ', "' + tipo + '") ', function (err, rows) {
             if (err)
                 callback(err);
             callback(undefined, rows.insertId);
@@ -53,10 +53,10 @@ var franquicia = {
         });
     },
 
-    actualizarStockVehiculo(marca, modelo, cantidad, callback) {
+    actualizarStockVehiculo(idVehiculo, cantidad, callback) {
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();
-        con.query('UPDATE vehiculo SET cantidad = (cantidad - ' + cantidad + ') WHERE marca = "' + marca + '" AND modelo = "' + modelo + '"', function (err, rows) {
+        con.query('UPDATE vehiculo SET cantidad = (cantidad + ' + cantidad + ') WHERE id = "' + idVehiculo + '"', function (err, rows) {
             if (err)
                 callback(err);
             callback(undefined, rows);
