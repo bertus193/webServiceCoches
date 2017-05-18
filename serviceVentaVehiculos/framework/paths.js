@@ -18,7 +18,7 @@ app.use(pdf)
 app.get('/stock', function (req, res) {
 	var marca = req.query.marca
 	var modelo = req.query.modelo
-	framework.getFranquicia().getStockVehiculo(marca, modelo, function (err, result) {
+	framework.getFranquicia().getVehiculo(marca, modelo, function (err, result) {
 		if (err) {
 			res.send(err)
 		}
@@ -38,7 +38,7 @@ app.get('/presupuesto', function (req, res) {
 	var marca = req.query.marca
 	var modelo = req.query.modelo
 	var proveedor = req.query.proveedor
-	framework.getProveedor().getPresupuestoVehiculo(proveedor, marca, modelo, function (err, result) {
+	framework.getProveedor().getVehiculo(proveedor, marca, modelo, function (err, result) {
 		if (err) {
 			res.send(err)
 		}
@@ -53,12 +53,38 @@ app.get('/presupuesto', function (req, res) {
 
 })
 
-//PEDIDO A FRANQUICIA (PUT)
-app.get('/pedidoF', function (req, res) {
-	res.send("to-do")
+//PEDIDO A FRANQUICIA VEHICULO(PUT)
+app.put('/pedidoF', function (req, res) {
+	var body = req.body
+	framework.getFranquicia().nuevoPedidoCliente(body["idCliente"], function (err, idInsert) {
+		if (err) {
+			res.send(err)
+		}
+		else {
+			for (var i in body["vehiculos"]) {
+				framework.getFranquicia().getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
+					if (err) {
+						res.send(err)
+					}
+					else if (vehiculo[0].cantidad == null) {
+						console.log("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+						//res.send("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+					}
+					else {
+						framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
+							if (err) {
+								res.send(err)
+							}
+						})
+					}
+				});
+			}
+			res.send("ok")
+		}
+	})
 })
 
-//PEDIDO A PROVEEDOR (PUT)
+//PEDIDO A PROVEEDOR VEHICULO(PUT)
 app.get('/pedidoP', function (req, res) {
 	res.send("to-do")
 })

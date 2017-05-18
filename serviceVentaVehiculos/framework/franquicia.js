@@ -2,7 +2,7 @@ var framework = require('./framework');
 
 var franquicia = {
 
-    getStockVehiculo(marca, modelo, callback) {
+    getVehiculo(marca, modelo, callback) {
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();
         con.query('SELECT * FROM vehiculo WHERE marca = "' + marca + '" AND modelo = "' + modelo + '"', function (err, rows) {
@@ -32,6 +32,36 @@ var franquicia = {
         });
     },
 
+    nuevoPedidoCliente(idCliente, callback) {
+        var con = framework.getMysql().getCon();
+        framework.getMysql().getFranquicia();
+        con.query('INSERT INTO factura (idCliente, tipo) VALUES (' + idCliente + ',"venta") ', function (err, rows) {
+            if (err)
+                callback(err);
+            callback(undefined, rows.insertId);
+        });
+    },
+
+    addVehiculoPedido(idFactura, idVehiculo, cantidad, precioVehiculo, callback) {
+        var total_linea = precioVehiculo * cantidad;
+        var con = framework.getMysql().getCon();
+        framework.getMysql().getFranquicia();
+        con.query('INSERT INTO linea_factura (idFactura, idProducto, cantidad, total_linea, tipo) VALUES (' + idFactura + ',' + idVehiculo + ',' + cantidad + ',' + total_linea + ',"vehiculo") ', function (err, rows) {
+            if (err)
+                callback(err);
+            callback(undefined, rows.insertId);
+        });
+    },
+
+    actualizarStockVehiculo(marca, modelo, cantidad, callback) {
+        var con = framework.getMysql().getCon();
+        framework.getMysql().getFranquicia();
+        con.query('UPDATE vehiculo SET cantidad = (cantidad - ' + cantidad + ') WHERE marca = "' + marca + '" AND modelo = "' + modelo + '"', function (err, rows) {
+            if (err)
+                callback(err);
+            callback(undefined, rows);
+        });
+    }
 
 
 
