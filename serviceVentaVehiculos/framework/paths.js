@@ -7,6 +7,7 @@ var fs = require('fs');
 var path = framework.path;
 var pdf = require('express-pdf');
 var dateFormat = require('dateformat');
+var async = require('async');
 
 //HTML CON PARAMETROS -> RENDER
 app.set('view engine', 'ejs');
@@ -95,40 +96,54 @@ app.put('/pedidoF', function (req, res) {
 app.put('/pedidoP', function (req, res) {
 	var body = req.body
 
-	var proveedorNum = req.query.proveedor
+	var proveedorNum = req.body['proveedor']
 	var proveedor = framework.getProveedor()
 	proveedor.setNum(proveedorNum)
+
+	var result = []
 
 	framework.getFranquicia().nuevoPedidoCliente(body["idCliente"], "pedido", function (err, idInsert) {
 		if (err) {
 			res.send(err)
 		}
 		else {
-			for (var i in body["vehiculos"]) {
-				proveedor.getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
-					if (err) {
-						res.send(err)
-					}
-					else if (vehiculo[0].cantidad == null || vehiculo[0].cantidad <= 0) {
-						console.log("[Error]No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
-						//res.send("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
-					}
-					else if (vehiculo[0].cantidad - body["vehiculos"][i]["cantidad"] < 0) {
-						console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
-					}
-					else {
-						framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
-							if (err) {
-								res.send(err)
-							}
-						})
-					}
-				});
-			}
-			res.send("ok")
+
+			//for (var i in body["vehiculos"]) {
+			(function next(i) {
+				console.log(i + " " + body["vehiculos"].length)
+				if (i == body["vehiculos"].length) {
+					res.contentType('application/json');
+					res.send(JSON.stringify(result));
+				}
+				else {
+					proveedor.getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
+						if (err) {
+							res.send(err)
+						}
+						else if (vehiculo[0].cantidad == null || vehiculo[0].cantidad <= 0) {
+							console.log("[Error]No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+						}
+						else if (vehiculo[0].cantidad - body["vehiculos"][i]["cantidad"] < 0) {
+							console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+						}
+						else {
+							framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
+								if (err) {
+									res.send(err)
+								}
+								else {
+									result.push({ marca: body["vehiculos"][i]["marca"], modelo: body["vehiculos"][i]["modelo"], cantidad: body["vehiculos"][i]["cantidad"] });
+									next(i + 1)
+								}
+							})
+						}
+					});
+				}
+			})(0)
 		}
 	})
 })
+
 
 //MODIFICAR (ACTUALIZA) STOCK FRANQUICIA (POST)
 app.post('/stockF', function (req, res) {
