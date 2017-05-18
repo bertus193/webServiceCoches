@@ -71,8 +71,11 @@ app.put('/pedidoF', function (req, res) {
 						res.send(err)
 					}
 					else if (vehiculo[0].cantidad == null || vehiculo[0].cantidad <= 0) {
-						console.log("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+						console.log("[Error]No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
 						//res.send("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+					}
+					else if (vehiculo[0].cantidad - body["vehiculos"][i]["cantidad"] < 0) {
+						console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
 					}
 					else {
 						framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
@@ -107,8 +110,11 @@ app.put('/pedidoP', function (req, res) {
 						res.send(err)
 					}
 					else if (vehiculo[0].cantidad == null || vehiculo[0].cantidad <= 0) {
-						console.log("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+						console.log("[Error]No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
 						//res.send("No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+					}
+					else if (vehiculo[0].cantidad - body["vehiculos"][i]["cantidad"] < 0) {
+						console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
 					}
 					else {
 						framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
@@ -124,9 +130,60 @@ app.put('/pedidoP', function (req, res) {
 	})
 })
 
-//MODIFICAR (ACTUALIZA) STOCK (POST)
-app.get('/stock', function (req, res) {
-	resp.send("to-do")
+//MODIFICAR (ACTUALIZA) STOCK FRANQUICIA (POST)
+app.post('/stockF', function (req, res) {
+	var body = req.body
+
+	for (var i in body["vehiculos"]) {
+		framework.getFranquicia().getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
+			if (err) {
+				res.send(err)
+			}
+			else if (vehiculo[0].cantidad == null) {
+				console.log("No existe el vehiculo " + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+			}
+			else if (vehiculo[0].cantidad + body["vehiculos"][i]["cantidad"] < 0) { //Puede ser negativo
+				console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+			}
+			else {
+				framework.getFranquicia().actualizarStockVehiculo(vehiculo[0].id, body["vehiculos"][i]["cantidad"], function (err, rows) {
+					if (err)
+						res.send(err)
+				})
+			}
+		})
+	}
+	res.send("Stock Actualizado")
+})
+
+//MODIFICAR (ACTUALIZA) STOCK PROVEEDOR (POST)
+app.post('/stockP', function (req, res) {
+	var body = req.body
+
+	var proveedorNum = req.body["proveedor"]
+	var proveedor = framework.getProveedor()
+	proveedor.setNum(proveedorNum)
+
+	for (var i in body["vehiculos"]) {
+		proveedor.getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
+			if (err) {
+				res.send(err)
+			}
+			else if (vehiculo[0].cantidad == null) {
+				console.log("No existe el vehiculo " + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+			}
+			else if (vehiculo[0].cantidad + body["vehiculos"][i]["cantidad"] < 0) { //Puede ser negativo
+				console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+			}
+			else {
+				proveedor.actualizarStockVehiculo(vehiculo[0].id, body["vehiculos"][i]["cantidad"], function (err, rows) {
+					if (err)
+						res.send(err)
+				})
+			}
+		})
+	}
+	res.send("Stock Actualizado")
 })
 
 //GENERA FACTURA (PUT)
