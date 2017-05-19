@@ -2,6 +2,16 @@ var framework = require('./framework');
 
 var franquicia = {
 
+    getAllVehiculos(marca, modelo, callback) {
+        var con = framework.getMysql().getCon();
+        framework.getMysql().getFranquicia();
+        con.query('SELECT * FROM vehiculo', function (err, rows) {
+            if (err)
+                callback(err);
+            callback(undefined, rows);
+        });
+    },
+
     getVehiculo(marca, modelo, callback) {
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();

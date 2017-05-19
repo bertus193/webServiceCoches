@@ -15,6 +15,24 @@ app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 app.use(pdf)
 
+app.get('/vehiculos', function (req, res) {
+	var marca = req.query.marca
+	var modelo = req.query.modelo
+	framework.getFranquicia().getAllVehiculos(marca, modelo, function (err, result) {
+		if (err) {
+			res.send(err)
+		}
+		else if (result[0].cantidad == null) {
+			res.send("No hay stock");
+		}
+		else {
+			res.setHeader('Content-Type', 'application/json');
+			res.send(result)
+		}
+	});
+	//res.render('../views/login.ejs', {user: 'test' })
+})
+
 app.get('/stock', function (req, res) {
 	var marca = req.query.marca
 	var modelo = req.query.modelo
