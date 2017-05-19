@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2017 a las 12:00:28
--- Versión del servidor: 10.1.19-MariaDB
--- Versión de PHP: 5.6.28
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -29,11 +20,12 @@ USE `franquicia`;
 --
 
 CREATE TABLE `alquiler` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idcliente` varchar(30) NOT NULL,
   `idvehiculo` int(11) NOT NULL,
   `fechaini` date NOT NULL,
-  `fechafin` date NOT NULL
+  `fechafin` date NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
@@ -48,7 +40,8 @@ CREATE TABLE `cliente` (
   `apellidos` varchar(100) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `telefono` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
@@ -58,10 +51,11 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `factura` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idcliente` int(11) NOT NULL,
   `tipo` varchar(25) NOT NULL,
-  `fecha` datetime DEFAULT CURRENT_TIMESTAMP
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -71,12 +65,13 @@ CREATE TABLE `factura` (
 --
 
 CREATE TABLE `linea_factura` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idFactura` int(11) NOT NULL,
   `idproducto` varchar(16) NOT NULL DEFAULT '',
   `cantidad` int(11) NOT NULL,
   `total_linea` decimal(16,2) DEFAULT NULL,
-  `tipo` varchar(16) DEFAULT NULL
+  `tipo` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -86,10 +81,11 @@ CREATE TABLE `linea_factura` (
 --
 
 CREATE TABLE `pieza` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(150) NOT NULL DEFAULT '',
   `precio` decimal(10,2) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 -- --------------------------------------------------------
@@ -99,86 +95,16 @@ CREATE TABLE `pieza` (
 --
 
 CREATE TABLE `vehiculo` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `color` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `disponibilidad` varchar(15) NOT NULL DEFAULT 00 COMMENT 'venta, alquiler, alquilado'
+  `disponibilidad` varchar(15) NOT NULL DEFAULT 00 COMMENT 'venta, alquiler, alquilado',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `alquiler`
---
-ALTER TABLE `alquiler`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `cliente`
---
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `linea_factura`
---
-ALTER TABLE `linea_factura`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `pieza`
---
-ALTER TABLE `pieza`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `vehiculo`
---
-ALTER TABLE `vehiculo`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `alquiler`
---
-ALTER TABLE `alquiler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `cliente`
---
-ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `factura`
---
-ALTER TABLE `factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pieza`
---
-ALTER TABLE `pieza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `vehiculo`
---
-ALTER TABLE `vehiculo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;--
--- Base de datos: `proveedorp1`
---
 CREATE DATABASE IF NOT EXISTS `proveedorp1` DEFAULT CHARACTER SET UTF8;
 USE `proveedorp1`;
 
@@ -189,24 +115,13 @@ USE `proveedorp1`;
 --
 
 CREATE TABLE `pieza` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(150) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `pieza`
---
-ALTER TABLE `pieza`
-  ADD PRIMARY KEY (`id`);
---
--- Base de datos: `proveedorp2`
---
 CREATE DATABASE IF NOT EXISTS `proveedorp2` DEFAULT CHARACTER SET UTF8;
 USE `proveedorp2`;
 
@@ -217,24 +132,14 @@ USE `proveedorp2`;
 --
 
 CREATE TABLE `pieza` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(150) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `pieza`
---
-ALTER TABLE `pieza`
-  ADD PRIMARY KEY (`id`);
---
--- Base de datos: `proveedorv1`
---
 CREATE DATABASE IF NOT EXISTS `proveedorv1` DEFAULT CHARACTER SET UTF8;
 USE `proveedorv1`;
 
@@ -245,24 +150,16 @@ USE `proveedorv1`;
 --
 
 CREATE TABLE `vehiculo` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `color` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `disponibilidad` varchar(15) NOT NULL
+  `disponibilidad` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `vehiculo`
---
-ALTER TABLE `vehiculo`
-  ADD PRIMARY KEY (`id`);
 --
 -- Base de datos: `proveedorv2`
 --
@@ -276,24 +173,15 @@ USE `proveedorv2`;
 --
 
 CREATE TABLE `vehiculo` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(200) NOT NULL,
   `modelo` varchar(200) NOT NULL,
   `color` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `disponibilidad` varchar(15) NOT NULL
+  `disponibilidad` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `vehiculo`
---
-ALTER TABLE `vehiculo`
-  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
