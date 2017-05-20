@@ -24,14 +24,14 @@ public class Vehiculo implements org.apache.axis2.databinding.ADBBean {
 	 * field for IdVehiculo
 	 */
 
-	protected java.lang.String localIdVehiculo;
+	protected int localIdVehiculo;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.lang.String
+	 * @return int
 	 */
-	public java.lang.String getIdVehiculo() {
+	public int getIdVehiculo() {
 		return localIdVehiculo;
 	}
 
@@ -41,7 +41,7 @@ public class Vehiculo implements org.apache.axis2.databinding.ADBBean {
 	 * @param param
 	 *            IdVehiculo
 	 */
-	public void setIdVehiculo(java.lang.String param) {
+	public void setIdVehiculo(int param) {
 
 		this.localIdVehiculo = param;
 
@@ -227,15 +227,13 @@ public class Vehiculo implements org.apache.axis2.databinding.ADBBean {
 		namespace = "";
 		writeStartElement(null, namespace, "idVehiculo", xmlWriter);
 
-		if (localIdVehiculo == null) {
-			// write the nil attribute
+		if (localIdVehiculo == java.lang.Integer.MIN_VALUE) {
 
 			throw new org.apache.axis2.databinding.ADBException("idVehiculo cannot be null!!");
 
 		} else {
-
-			xmlWriter.writeCharacters(localIdVehiculo);
-
+			xmlWriter
+					.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdVehiculo));
 		}
 
 		xmlWriter.writeEndElement();
@@ -504,11 +502,7 @@ public class Vehiculo implements org.apache.axis2.databinding.ADBBean {
 
 		elementList.add(new javax.xml.namespace.QName("", "idVehiculo"));
 
-		if (localIdVehiculo != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdVehiculo));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("idVehiculo cannot be null!!");
-		}
+		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdVehiculo));
 
 		elementList.add(new javax.xml.namespace.QName("", "marca"));
 
@@ -622,7 +616,7 @@ public class Vehiculo implements org.apache.axis2.databinding.ADBBean {
 
 					java.lang.String content = reader.getElementText();
 
-					object.setIdVehiculo(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+					object.setIdVehiculo(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
 
 					reader.next();
 

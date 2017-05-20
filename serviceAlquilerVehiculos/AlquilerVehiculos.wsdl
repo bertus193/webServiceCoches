@@ -20,31 +20,47 @@
       </xsd:element>
       <xsd:element name="AsignarVehiculos">
       	<xsd:complexType>
-      		<xsd:sequence>
-      			<xsd:element name="idCliente" type="xsd:int"></xsd:element>
-      			<xsd:element name="idVehiculo" type="xsd:int"></xsd:element>
-      			<xsd:element name="fechaini" type="xsd:date"></xsd:element>
-      			<xsd:element name="fechafin" type="xsd:date"></xsd:element>
+      		<xsd:sequence>
+      			<xsd:element name="asignacion"
+      				type="tns:Asignacion" maxOccurs="unbounded" minOccurs="0">
+      			</xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
       <xsd:element name="AsignarVehiculosResponse">
       	<xsd:complexType>
-      		<xsd:sequence>
-      			<xsd:element name="mensaje" type="xsd:string"></xsd:element>
-      			<xsd:element name="asignado" type="xsd:boolean"></xsd:element>
+      		<xsd:sequence>
+      			<xsd:element name="vehiculos"
+      				type="tns:VehiculosAsignados" maxOccurs="unbounded" minOccurs="0">
+      			</xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
     
       <xsd:complexType name="Vehiculo">
       	<xsd:sequence>
-      		<xsd:element name="idVehiculo" type="xsd:string"></xsd:element>
+      		<xsd:element name="idVehiculo" type="xsd:int"></xsd:element>
       		<xsd:element name="marca" type="xsd:string"></xsd:element>
       		<xsd:element name="modelo" type="xsd:string"></xsd:element>
       		<xsd:element name="color" type="xsd:string"></xsd:element>
       		<xsd:element name="mensaje" type="xsd:string"></xsd:element>
       		<xsd:element name="precio" type="xsd:float"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="Asignacion">
+      	<xsd:sequence>
+      		<xsd:element name="idCliente" type="xsd:string"></xsd:element>
+      		<xsd:element name="idVehiculo" type="xsd:int"></xsd:element>
+      		<xsd:element name="fechaini" type="xsd:date"></xsd:element>
+      		<xsd:element name="fechafin" type="xsd:date"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="VehiculosAsignados">
+      	<xsd:sequence>
+      		<xsd:element name="idCliente" type="xsd:string"></xsd:element>
+      		<xsd:element name="idVehiculo" type="xsd:int"></xsd:element>
       	</xsd:sequence>
       </xsd:complexType>
     </xsd:schema>

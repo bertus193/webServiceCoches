@@ -19,56 +19,71 @@ public class AsignarVehiculosResponse implements org.apache.axis2.databinding.AD
 			"http://www.example.org/AlquilerVehiculos/", "AsignarVehiculosResponse", "ns1");
 
 	/**
-	 * field for Mensaje
+	 * field for Vehiculos This was an Array!
 	 */
 
-	protected java.lang.String localMensaje;
+	protected org.example.www.alquilervehiculos.VehiculosAsignados[] localVehiculos;
+
+	/*
+	 * This tracker boolean wil be used to detect whether the user called the
+	 * set method for this attribute. It will be used to determine whether to
+	 * include this field in the serialized XML
+	 */
+	protected boolean localVehiculosTracker = false;
+
+	public boolean isVehiculosSpecified() {
+		return localVehiculosTracker;
+	}
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.lang.String
+	 * @return org.example.www.alquilervehiculos.VehiculosAsignados[]
 	 */
-	public java.lang.String getMensaje() {
-		return localMensaje;
+	public org.example.www.alquilervehiculos.VehiculosAsignados[] getVehiculos() {
+		return localVehiculos;
+	}
+
+	/**
+	 * validate the array for Vehiculos
+	 */
+	protected void validateVehiculos(org.example.www.alquilervehiculos.VehiculosAsignados[] param) {
+
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            Mensaje
+	 *            Vehiculos
 	 */
-	public void setMensaje(java.lang.String param) {
+	public void setVehiculos(org.example.www.alquilervehiculos.VehiculosAsignados[] param) {
 
-		this.localMensaje = param;
+		validateVehiculos(param);
 
+		localVehiculosTracker = param != null;
+
+		this.localVehiculos = param;
 	}
 
 	/**
-	 * field for Asignado
-	 */
-
-	protected boolean localAsignado;
-
-	/**
-	 * Auto generated getter method
-	 * 
-	 * @return boolean
-	 */
-	public boolean getAsignado() {
-		return localAsignado;
-	}
-
-	/**
-	 * Auto generated setter method
+	 * Auto generated add method for the array for convenience
 	 * 
 	 * @param param
-	 *            Asignado
+	 *            org.example.www.alquilervehiculos.VehiculosAsignados
 	 */
-	public void setAsignado(boolean param) {
+	public void addVehiculos(org.example.www.alquilervehiculos.VehiculosAsignados param) {
+		if (localVehiculos == null) {
+			localVehiculos = new org.example.www.alquilervehiculos.VehiculosAsignados[] {};
+		}
 
-		this.localAsignado = param;
+		// update the setting tracker
+		localVehiculosTracker = true;
+
+		java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localVehiculos);
+		list.add(param);
+		this.localVehiculos = (org.example.www.alquilervehiculos.VehiculosAsignados[]) list
+				.toArray(new org.example.www.alquilervehiculos.VehiculosAsignados[list.size()]);
 
 	}
 
@@ -114,36 +129,25 @@ public class AsignarVehiculosResponse implements org.apache.axis2.databinding.AD
 			}
 
 		}
+		if (localVehiculosTracker) {
+			if (localVehiculos != null) {
+				for (int i = 0; i < localVehiculos.length; i++) {
+					if (localVehiculos[i] != null) {
+						localVehiculos[i].serialize(new javax.xml.namespace.QName("", "vehiculos"), xmlWriter);
+					} else {
 
-		namespace = "";
-		writeStartElement(null, namespace, "mensaje", xmlWriter);
+						// we don't have to do any thing since minOccures is
+						// zero
 
-		if (localMensaje == null) {
-			// write the nil attribute
+					}
 
-			throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
+				}
+			} else {
 
-		} else {
+				throw new org.apache.axis2.databinding.ADBException("vehiculos cannot be null!!");
 
-			xmlWriter.writeCharacters(localMensaje);
-
+			}
 		}
-
-		xmlWriter.writeEndElement();
-
-		namespace = "";
-		writeStartElement(null, namespace, "asignado", xmlWriter);
-
-		if (false) {
-
-			throw new org.apache.axis2.databinding.ADBException("asignado cannot be null!!");
-
-		} else {
-			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAsignado));
-		}
-
-		xmlWriter.writeEndElement();
-
 		xmlWriter.writeEndElement();
 
 	}
@@ -329,17 +333,27 @@ public class AsignarVehiculosResponse implements org.apache.axis2.databinding.AD
 		java.util.ArrayList elementList = new java.util.ArrayList();
 		java.util.ArrayList attribList = new java.util.ArrayList();
 
-		elementList.add(new javax.xml.namespace.QName("", "mensaje"));
+		if (localVehiculosTracker) {
+			if (localVehiculos != null) {
+				for (int i = 0; i < localVehiculos.length; i++) {
 
-		if (localMensaje != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensaje));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
+					if (localVehiculos[i] != null) {
+						elementList.add(new javax.xml.namespace.QName("", "vehiculos"));
+						elementList.add(localVehiculos[i]);
+					} else {
+
+						// nothing to do
+
+					}
+
+				}
+			} else {
+
+				throw new org.apache.axis2.databinding.ADBException("vehiculos cannot be null!!");
+
+			}
+
 		}
-
-		elementList.add(new javax.xml.namespace.QName("", "asignado"));
-
-		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAsignado));
 
 		return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(),
 				attribList.toArray());
@@ -404,54 +418,52 @@ public class AsignarVehiculosResponse implements org.apache.axis2.databinding.AD
 
 				reader.next();
 
-				while (!reader.isStartElement() && !reader.isEndElement())
-					reader.next();
-
-				if (reader.isStartElement() && new javax.xml.namespace.QName("", "mensaje").equals(reader.getName())) {
-
-					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "mensaje" + "  cannot be null");
-					}
-
-					java.lang.String content = reader.getElementText();
-
-					object.setMensaje(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-
-					reader.next();
-
-				} // End of if for expected property start element
-
-				else {
-					// A start element we are not expecting indicates an invalid
-					// parameter was passed
-					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-				}
+				java.util.ArrayList list1 = new java.util.ArrayList();
 
 				while (!reader.isStartElement() && !reader.isEndElement())
 					reader.next();
 
-				if (reader.isStartElement() && new javax.xml.namespace.QName("", "asignado").equals(reader.getName())) {
+				if (reader.isStartElement()
+						&& new javax.xml.namespace.QName("", "vehiculos").equals(reader.getName())) {
 
-					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "asignado" + "  cannot be null");
+					// Process the array and step past its final element's end.
+					list1.add(org.example.www.alquilervehiculos.VehiculosAsignados.Factory.parse(reader));
+
+					// loop until we find a start element that is not part of
+					// this array
+					boolean loopDone1 = false;
+					while (!loopDone1) {
+						// We should be at the end element, but make sure
+						while (!reader.isEndElement())
+							reader.next();
+						// Step out of this element
+						reader.next();
+						// Step to next element event.
+						while (!reader.isStartElement() && !reader.isEndElement())
+							reader.next();
+						if (reader.isEndElement()) {
+							// two continuous end elements means we are exiting
+							// the xml structure
+							loopDone1 = true;
+						} else {
+							if (new javax.xml.namespace.QName("", "vehiculos").equals(reader.getName())) {
+								list1.add(org.example.www.alquilervehiculos.VehiculosAsignados.Factory.parse(reader));
+
+							} else {
+								loopDone1 = true;
+							}
+						}
 					}
+					// call the converter utility to convert and set the array
 
-					java.lang.String content = reader.getElementText();
-
-					object.setAsignado(org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
-
-					reader.next();
+					object.setVehiculos(
+							(org.example.www.alquilervehiculos.VehiculosAsignados[]) org.apache.axis2.databinding.utils.ConverterUtil
+									.convertToArray(org.example.www.alquilervehiculos.VehiculosAsignados.class, list1));
 
 				} // End of if for expected property start element
 
 				else {
-					// A start element we are not expecting indicates an invalid
-					// parameter was passed
-					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+
 				}
 
 				while (!reader.isStartElement() && !reader.isEndElement())

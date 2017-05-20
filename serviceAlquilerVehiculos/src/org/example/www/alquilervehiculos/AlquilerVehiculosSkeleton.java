@@ -7,6 +7,7 @@
  */
 package org.example.www.alquilervehiculos;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,23 +26,35 @@ public class AlquilerVehiculosSkeleton {
 	public org.example.www.alquilervehiculos.AsignarVehiculosResponse asignarVehiculos(
 			org.example.www.alquilervehiculos.AsignarVehiculos asignarVehiculos) {
 		
-		int idCliente = asignarVehiculos.getIdCliente();
-		int idVehiculo = asignarVehiculos.getIdVehiculo();
-		Date fechai = asignarVehiculos.getFechaini();
-		Date fechaf = asignarVehiculos.getFechafin();
+		//int idCliente = asignarVehiculos.getIdCliente();
+		//int idVehiculo = asignarVehiculos.getIdVehiculo();
+		//Date fechai = asignarVehiculos.getFechaini();
+		//Date fechaf = asignarVehiculos.getFechafin();
+		
+		Asignacion[] alquilar = asignarVehiculos.getAsignacion();
 		
 		org.example.www.alquilervehiculos.persistencia.Consultas consulta = new org.example.www.alquilervehiculos.persistencia.Consultas();
 		
-		boolean asignado = consulta.asignarVehiculo(idCliente, idVehiculo, fechai, fechaf);
+		boolean asignado = consulta.asignarVehiculo(alquilar);
 		
 		AsignarVehiculosResponse av = new AsignarVehiculosResponse();
 		
-		av.setAsignado(asignado);
+		//av.setAsignado(asignado);
+		List<VehiculosAsignados> lista = new ArrayList<VehiculosAsignados>();
+		
+		for(int i=0; i<alquilar.length; i++) {
+			VehiculosAsignados v = new VehiculosAsignados();
+			v.setIdCliente(alquilar[i].getIdCliente());
+			v.setIdVehiculo(alquilar[i].getIdVehiculo());
+			lista.add(v);
+		}
+		VehiculosAsignados[] retorno = new VehiculosAsignados[lista.size()];
+		retorno = lista.toArray(retorno);
 		
 		if(asignado) {
-			av.setMensaje("Vehículo asignado");
+			av.setVehiculos(retorno);
 		} else {
-			av.setMensaje("Vehículo no asignado");
+			av.setVehiculos(retorno);
 		}
 		
 		return av;

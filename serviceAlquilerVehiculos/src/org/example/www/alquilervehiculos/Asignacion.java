@@ -1,6 +1,6 @@
 
 /**
- * AsignarVehiculos.java
+ * Asignacion.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:18:31 BST)
@@ -9,81 +9,122 @@
 package org.example.www.alquilervehiculos;
 
 /**
- * AsignarVehiculos bean class
+ * Asignacion bean class
  */
 @SuppressWarnings({ "unchecked", "unused" })
 
-public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
-
-	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-			"http://www.example.org/AlquilerVehiculos/", "AsignarVehiculos", "ns1");
+public class Asignacion implements org.apache.axis2.databinding.ADBBean {
+	/*
+	 * This type was generated from the piece of schema that had name =
+	 * Asignacion Namespace URI = http://www.example.org/AlquilerVehiculos/
+	 * Namespace Prefix = ns1
+	 */
 
 	/**
-	 * field for Asignacion This was an Array!
+	 * field for IdCliente
 	 */
 
-	protected org.example.www.alquilervehiculos.Asignacion[] localAsignacion;
-
-	/*
-	 * This tracker boolean wil be used to detect whether the user called the
-	 * set method for this attribute. It will be used to determine whether to
-	 * include this field in the serialized XML
-	 */
-	protected boolean localAsignacionTracker = false;
-
-	public boolean isAsignacionSpecified() {
-		return localAsignacionTracker;
-	}
+	protected java.lang.String localIdCliente;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return org.example.www.alquilervehiculos.Asignacion[]
+	 * @return java.lang.String
 	 */
-	public org.example.www.alquilervehiculos.Asignacion[] getAsignacion() {
-		return localAsignacion;
-	}
-
-	/**
-	 * validate the array for Asignacion
-	 */
-	protected void validateAsignacion(org.example.www.alquilervehiculos.Asignacion[] param) {
-
+	public java.lang.String getIdCliente() {
+		return localIdCliente;
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            Asignacion
+	 *            IdCliente
 	 */
-	public void setAsignacion(org.example.www.alquilervehiculos.Asignacion[] param) {
+	public void setIdCliente(java.lang.String param) {
 
-		validateAsignacion(param);
+		this.localIdCliente = param;
 
-		localAsignacionTracker = param != null;
-
-		this.localAsignacion = param;
 	}
 
 	/**
-	 * Auto generated add method for the array for convenience
+	 * field for IdVehiculo
+	 */
+
+	protected int localIdVehiculo;
+
+	/**
+	 * Auto generated getter method
+	 * 
+	 * @return int
+	 */
+	public int getIdVehiculo() {
+		return localIdVehiculo;
+	}
+
+	/**
+	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            org.example.www.alquilervehiculos.Asignacion
+	 *            IdVehiculo
 	 */
-	public void addAsignacion(org.example.www.alquilervehiculos.Asignacion param) {
-		if (localAsignacion == null) {
-			localAsignacion = new org.example.www.alquilervehiculos.Asignacion[] {};
-		}
+	public void setIdVehiculo(int param) {
 
-		// update the setting tracker
-		localAsignacionTracker = true;
+		this.localIdVehiculo = param;
 
-		java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localAsignacion);
-		list.add(param);
-		this.localAsignacion = (org.example.www.alquilervehiculos.Asignacion[]) list
-				.toArray(new org.example.www.alquilervehiculos.Asignacion[list.size()]);
+	}
+
+	/**
+	 * field for Fechaini
+	 */
+
+	protected java.util.Date localFechaini;
+
+	/**
+	 * Auto generated getter method
+	 * 
+	 * @return java.util.Date
+	 */
+	public java.util.Date getFechaini() {
+		return localFechaini;
+	}
+
+	/**
+	 * Auto generated setter method
+	 * 
+	 * @param param
+	 *            Fechaini
+	 */
+	public void setFechaini(java.util.Date param) {
+
+		this.localFechaini = param;
+
+	}
+
+	/**
+	 * field for Fechafin
+	 */
+
+	protected java.util.Date localFechafin;
+
+	/**
+	 * Auto generated getter method
+	 * 
+	 * @return java.util.Date
+	 */
+	public java.util.Date getFechafin() {
+		return localFechafin;
+	}
+
+	/**
+	 * Auto generated setter method
+	 * 
+	 * @param param
+	 *            Fechafin
+	 */
+	public void setFechafin(java.util.Date param) {
+
+		this.localFechafin = param;
 
 	}
 
@@ -96,8 +137,8 @@ public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
 	public org.apache.axiom.om.OMElement getOMElement(final javax.xml.namespace.QName parentQName,
 			final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException {
 
-		org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this, MY_QNAME);
-		return factory.createOMElement(dataSource, MY_QNAME);
+		org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this, parentQName);
+		return factory.createOMElement(dataSource, parentQName);
 
 	}
 
@@ -122,32 +163,75 @@ public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
 			java.lang.String namespacePrefix = registerPrefix(xmlWriter, "http://www.example.org/AlquilerVehiculos/");
 			if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
 				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type",
-						namespacePrefix + ":AsignarVehiculos", xmlWriter);
+						namespacePrefix + ":Asignacion", xmlWriter);
 			} else {
-				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type", "AsignarVehiculos",
-						xmlWriter);
+				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type", "Asignacion", xmlWriter);
 			}
 
 		}
-		if (localAsignacionTracker) {
-			if (localAsignacion != null) {
-				for (int i = 0; i < localAsignacion.length; i++) {
-					if (localAsignacion[i] != null) {
-						localAsignacion[i].serialize(new javax.xml.namespace.QName("", "asignacion"), xmlWriter);
-					} else {
 
-						// we don't have to do any thing since minOccures is
-						// zero
+		namespace = "";
+		writeStartElement(null, namespace, "idCliente", xmlWriter);
 
-					}
+		if (localIdCliente == null) {
+			// write the nil attribute
 
-				}
-			} else {
+			throw new org.apache.axis2.databinding.ADBException("idCliente cannot be null!!");
 
-				throw new org.apache.axis2.databinding.ADBException("asignacion cannot be null!!");
+		} else {
 
-			}
+			xmlWriter.writeCharacters(localIdCliente);
+
 		}
+
+		xmlWriter.writeEndElement();
+
+		namespace = "";
+		writeStartElement(null, namespace, "idVehiculo", xmlWriter);
+
+		if (localIdVehiculo == java.lang.Integer.MIN_VALUE) {
+
+			throw new org.apache.axis2.databinding.ADBException("idVehiculo cannot be null!!");
+
+		} else {
+			xmlWriter
+					.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdVehiculo));
+		}
+
+		xmlWriter.writeEndElement();
+
+		namespace = "";
+		writeStartElement(null, namespace, "fechaini", xmlWriter);
+
+		if (localFechaini == null) {
+			// write the nil attribute
+
+			throw new org.apache.axis2.databinding.ADBException("fechaini cannot be null!!");
+
+		} else {
+
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFechaini));
+
+		}
+
+		xmlWriter.writeEndElement();
+
+		namespace = "";
+		writeStartElement(null, namespace, "fechafin", xmlWriter);
+
+		if (localFechafin == null) {
+			// write the nil attribute
+
+			throw new org.apache.axis2.databinding.ADBException("fechafin cannot be null!!");
+
+		} else {
+
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFechafin));
+
+		}
+
+		xmlWriter.writeEndElement();
+
 		xmlWriter.writeEndElement();
 
 	}
@@ -333,26 +417,32 @@ public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
 		java.util.ArrayList elementList = new java.util.ArrayList();
 		java.util.ArrayList attribList = new java.util.ArrayList();
 
-		if (localAsignacionTracker) {
-			if (localAsignacion != null) {
-				for (int i = 0; i < localAsignacion.length; i++) {
+		elementList.add(new javax.xml.namespace.QName("", "idCliente"));
 
-					if (localAsignacion[i] != null) {
-						elementList.add(new javax.xml.namespace.QName("", "asignacion"));
-						elementList.add(localAsignacion[i]);
-					} else {
+		if (localIdCliente != null) {
+			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdCliente));
+		} else {
+			throw new org.apache.axis2.databinding.ADBException("idCliente cannot be null!!");
+		}
 
-						// nothing to do
+		elementList.add(new javax.xml.namespace.QName("", "idVehiculo"));
 
-					}
+		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdVehiculo));
 
-				}
-			} else {
+		elementList.add(new javax.xml.namespace.QName("", "fechaini"));
 
-				throw new org.apache.axis2.databinding.ADBException("asignacion cannot be null!!");
+		if (localFechaini != null) {
+			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFechaini));
+		} else {
+			throw new org.apache.axis2.databinding.ADBException("fechaini cannot be null!!");
+		}
 
-			}
+		elementList.add(new javax.xml.namespace.QName("", "fechafin"));
 
+		if (localFechafin != null) {
+			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFechafin));
+		} else {
+			throw new org.apache.axis2.databinding.ADBException("fechafin cannot be null!!");
 		}
 
 		return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(),
@@ -375,8 +465,8 @@ public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
 		 * is a complex type, the reader is positioned at the end element of its
 		 * outer element
 		 */
-		public static AsignarVehiculos parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-			AsignarVehiculos object = new AsignarVehiculos();
+		public static Asignacion parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
+			Asignacion object = new Asignacion();
 
 			int event;
 			java.lang.String nillableValue = null;
@@ -399,11 +489,11 @@ public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
 
 						java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":") + 1);
 
-						if (!"AsignarVehiculos".equals(type)) {
+						if (!"Asignacion".equals(type)) {
 							// find namespace for the prefix
 							java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-							return (AsignarVehiculos) org.example.www.alquilervehiculos.ExtensionMapper
-									.getTypeObject(nsUri, type, reader);
+							return (Asignacion) org.example.www.alquilervehiculos.ExtensionMapper.getTypeObject(nsUri,
+									type, reader);
 						}
 
 					}
@@ -417,52 +507,106 @@ public class AsignarVehiculos implements org.apache.axis2.databinding.ADBBean {
 
 				reader.next();
 
-				java.util.ArrayList list1 = new java.util.ArrayList();
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				if (reader.isStartElement()
+						&& new javax.xml.namespace.QName("", "idCliente").equals(reader.getName())) {
+
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+						throw new org.apache.axis2.databinding.ADBException(
+								"The element: " + "idCliente" + "  cannot be null");
+					}
+
+					java.lang.String content = reader.getElementText();
+
+					object.setIdCliente(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+
+					reader.next();
+
+				} // End of if for expected property start element
+
+				else {
+					// A start element we are not expecting indicates an invalid
+					// parameter was passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+				}
 
 				while (!reader.isStartElement() && !reader.isEndElement())
 					reader.next();
 
 				if (reader.isStartElement()
-						&& new javax.xml.namespace.QName("", "asignacion").equals(reader.getName())) {
+						&& new javax.xml.namespace.QName("", "idVehiculo").equals(reader.getName())) {
 
-					// Process the array and step past its final element's end.
-					list1.add(org.example.www.alquilervehiculos.Asignacion.Factory.parse(reader));
-
-					// loop until we find a start element that is not part of
-					// this array
-					boolean loopDone1 = false;
-					while (!loopDone1) {
-						// We should be at the end element, but make sure
-						while (!reader.isEndElement())
-							reader.next();
-						// Step out of this element
-						reader.next();
-						// Step to next element event.
-						while (!reader.isStartElement() && !reader.isEndElement())
-							reader.next();
-						if (reader.isEndElement()) {
-							// two continuous end elements means we are exiting
-							// the xml structure
-							loopDone1 = true;
-						} else {
-							if (new javax.xml.namespace.QName("", "asignacion").equals(reader.getName())) {
-								list1.add(org.example.www.alquilervehiculos.Asignacion.Factory.parse(reader));
-
-							} else {
-								loopDone1 = true;
-							}
-						}
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+						throw new org.apache.axis2.databinding.ADBException(
+								"The element: " + "idVehiculo" + "  cannot be null");
 					}
-					// call the converter utility to convert and set the array
 
-					object.setAsignacion(
-							(org.example.www.alquilervehiculos.Asignacion[]) org.apache.axis2.databinding.utils.ConverterUtil
-									.convertToArray(org.example.www.alquilervehiculos.Asignacion.class, list1));
+					java.lang.String content = reader.getElementText();
+
+					object.setIdVehiculo(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+
+					reader.next();
 
 				} // End of if for expected property start element
 
 				else {
+					// A start element we are not expecting indicates an invalid
+					// parameter was passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+				}
 
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				if (reader.isStartElement() && new javax.xml.namespace.QName("", "fechaini").equals(reader.getName())) {
+
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+						throw new org.apache.axis2.databinding.ADBException(
+								"The element: " + "fechaini" + "  cannot be null");
+					}
+
+					java.lang.String content = reader.getElementText();
+
+					object.setFechaini(org.apache.axis2.databinding.utils.ConverterUtil.convertToDate(content));
+
+					reader.next();
+
+				} // End of if for expected property start element
+
+				else {
+					// A start element we are not expecting indicates an invalid
+					// parameter was passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+				}
+
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				if (reader.isStartElement() && new javax.xml.namespace.QName("", "fechafin").equals(reader.getName())) {
+
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+						throw new org.apache.axis2.databinding.ADBException(
+								"The element: " + "fechafin" + "  cannot be null");
+					}
+
+					java.lang.String content = reader.getElementText();
+
+					object.setFechafin(org.apache.axis2.databinding.utils.ConverterUtil.convertToDate(content));
+
+					reader.next();
+
+				} // End of if for expected property start element
+
+				else {
+					// A start element we are not expecting indicates an invalid
+					// parameter was passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
 				}
 
 				while (!reader.isStartElement() && !reader.isEndElement())

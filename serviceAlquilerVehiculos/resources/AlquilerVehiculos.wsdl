@@ -21,30 +21,50 @@
       <xsd:element name="AsignarVehiculos">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="idCliente" type="xsd:int"/>
-      			<xsd:element name="idVehiculo" type="xsd:int"/>
-      			<xsd:element name="fechaini" type="xsd:date"/>
-      			<xsd:element name="fechafin" type="xsd:date"/>
+
+
+
+
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="asignacion" type="tns:Asignacion">
+      			</xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
       <xsd:element name="AsignarVehiculosResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="mensaje" type="xsd:string"/>
-      			<xsd:element name="asignado" type="xsd:boolean"/>
+
+
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:VehiculosAsignados">
+      			</xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
     
       <xsd:complexType name="Vehiculo">
       	<xsd:sequence>
-      		<xsd:element name="idVehiculo" type="xsd:string"/>
+      		<xsd:element name="idVehiculo" type="xsd:int"/>
       		<xsd:element name="marca" type="xsd:string"/>
       		<xsd:element name="modelo" type="xsd:string"/>
       		<xsd:element name="color" type="xsd:string"/>
       		<xsd:element name="mensaje" type="xsd:string"/>
       		<xsd:element name="precio" type="xsd:float"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="Asignacion">
+      	<xsd:sequence>
+      		<xsd:element name="idCliente" type="xsd:string"/>
+      		<xsd:element name="idVehiculo" type="xsd:int"/>
+      		<xsd:element name="fechaini" type="xsd:date"/>
+      		<xsd:element name="fechafin" type="xsd:date"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="VehiculosAsignados">
+      	<xsd:sequence>
+      		<xsd:element name="idCliente" type="xsd:string"/>
+      		<xsd:element name="idVehiculo" type="xsd:int"/>
       	</xsd:sequence>
       </xsd:complexType>
     </xsd:schema>
