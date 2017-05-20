@@ -26,60 +26,60 @@
             
 
                         /**
-                        * field for IdVehiculo
+                        * field for Mensaje
                         */
 
                         
-                                    protected java.lang.String localIdVehiculo ;
+                                    protected java.lang.String localMensaje ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getIdVehiculo(){
-                               return localIdVehiculo;
+                           public  java.lang.String getMensaje(){
+                               return localMensaje;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param IdVehiculo
+                               * @param param Mensaje
                                */
-                               public void setIdVehiculo(java.lang.String param){
+                               public void setMensaje(java.lang.String param){
                             
-                                            this.localIdVehiculo=param;
+                                            this.localMensaje=param;
                                        
 
                                }
                             
 
                         /**
-                        * field for Cantidad
+                        * field for Devolver
                         */
 
                         
-                                    protected int localCantidad ;
+                                    protected boolean localDevolver ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return int
+                           * @return boolean
                            */
-                           public  int getCantidad(){
-                               return localCantidad;
+                           public  boolean getDevolver(){
+                               return localDevolver;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Cantidad
+                               * @param param Devolver
                                */
-                               public void setCantidad(int param){
+                               public void setDevolver(boolean param){
                             
-                                            this.localCantidad=param;
+                                            this.localDevolver=param;
                                        
 
                                }
@@ -145,32 +145,32 @@
                    }
                
                                     namespace = "";
-                                    writeStartElement(null, namespace, "idVehiculo", xmlWriter);
+                                    writeStartElement(null, namespace, "mensaje", xmlWriter);
                              
 
-                                          if (localIdVehiculo==null){
+                                          if (localMensaje==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("idVehiculo cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localIdVehiculo);
+                                                   xmlWriter.writeCharacters(localMensaje);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
                              
                                     namespace = "";
-                                    writeStartElement(null, namespace, "cantidad", xmlWriter);
+                                    writeStartElement(null, namespace, "devolver", xmlWriter);
                              
-                                               if (localCantidad==java.lang.Integer.MIN_VALUE) {
+                                               if (false) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("cantidad cannot be null!!");
+                                                         throw new org.apache.axis2.databinding.ADBException("devolver cannot be null!!");
                                                       
                                                } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCantidad));
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDevolver));
                                                }
                                     
                                    xmlWriter.writeEndElement();
@@ -361,19 +361,19 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "idVehiculo"));
+                                                                      "mensaje"));
                                  
-                                        if (localIdVehiculo != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdVehiculo));
+                                        if (localMensaje != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensaje));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("idVehiculo cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
                                         }
                                     
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "cantidad"));
+                                                                      "devolver"));
                                  
                                 elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCantidad));
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDevolver));
                             
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -453,17 +453,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","idVehiculo").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensaje").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"idVehiculo" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensaje" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setIdVehiculo(
+                                              object.setMensaje(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
@@ -478,18 +478,18 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","cantidad").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","devolver").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"cantidad" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"devolver" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setCantidad(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                              object.setDevolver(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
                                               
                                         reader.next();
                                     
