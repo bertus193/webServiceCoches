@@ -14,5 +14,9 @@
             <actionMapping>http://www.example.org/CompraVehiculosProveedor2/comprobarStock</actionMapping>
             <outputActionMapping>http://www.example.org/CompraVehiculosProveedor2/CompraVehiculosProveedor2/comprobarStockResponse</outputActionMapping>
         </operation>
+        <operation name="sumarCantidad" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/CompraVehiculosProveedor2/">
+            <actionMapping>http://www.example.org/CompraVehiculosProveedor2/sumarCantidad</actionMapping>
+            <outputActionMapping>http://www.example.org/CompraVehiculosProveedor2/CompraVehiculosProveedor2/sumarCantidadResponse</outputActionMapping>
+        </operation>
     </service>
 </serviceGroup>

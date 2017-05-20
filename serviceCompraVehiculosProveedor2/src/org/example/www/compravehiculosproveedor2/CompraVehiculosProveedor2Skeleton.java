@@ -31,8 +31,10 @@ public class CompraVehiculosProveedor2Skeleton{
     	
         for(int i = 0; i< actualizarStock.localVehiculos.length; i++){       
 	       	try {
-	 			PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad + ? where id = ?");
-	 			prepStmt.setString(1, actualizarStock.localVehiculos[i].getIdVehiculo());
+	 			PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad = cantidad + ? where id = ?");
+	 			prepStmt.setInt(1, actualizarStock.localVehiculos[i].getCantidad());
+	 			prepStmt.setString(2, actualizarStock.localVehiculos[i].getIdVehiculo());
+	 			
 	 			ResultSet rs = prepStmt.executeQuery();
 	 			if(!rs.rowUpdated()){
 	 				error = true;
@@ -83,6 +85,26 @@ public class CompraVehiculosProveedor2Skeleton{
 	 		}
         }
         
+    	return salida;
+    }
+    
+    /**
+    * Auto generated method signature
+    * 
+    * @param sumarCantidad 
+    * @return sumarCantidadResponse 
+    */
+
+    public org.example.www.compravehiculosproveedor2.SumarCantidadResponse sumarCantidad(org.example.www.compravehiculosproveedor2.SumarCantidad sumarCantidad)
+    {
+    	SumarCantidadResponse salida = new SumarCantidadResponse();	
+    	int cantidad = 0;
+    	
+    	for(int i = 0; i< sumarCantidad.localVehiculos.length;i++){
+    		cantidad = cantidad + sumarCantidad.localVehiculos[i].localLinea_total;
+    	}
+    	    	
+    	salida.setTotal(cantidad);
     	return salida;
     }
 

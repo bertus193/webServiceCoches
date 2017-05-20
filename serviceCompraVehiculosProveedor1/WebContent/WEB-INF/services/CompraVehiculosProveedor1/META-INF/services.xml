@@ -6,6 +6,10 @@
         <parameter name="ServiceClass">org.example.www.compravehiculosproveedor.CompraVehiculosProveedor1Skeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="sumarCantidad" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/CompraVehiculosProveedor/">
+            <actionMapping>http://www.example.org/CompraVehiculosProveedor/sumarCantidad</actionMapping>
+            <outputActionMapping>http://www.example.org/CompraVehiculosProveedor/CompraVehiculosProveedor1/sumarCantidadResponse</outputActionMapping>
+        </operation>
         <operation name="actualizarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/CompraVehiculosProveedor/">
             <actionMapping>http://www.example.org/CompraVehiculosProveedor/actualizarStock</actionMapping>
             <outputActionMapping>http://www.example.org/CompraVehiculosProveedor/CompraVehiculosProveedor1/actualizarStockResponse</outputActionMapping>

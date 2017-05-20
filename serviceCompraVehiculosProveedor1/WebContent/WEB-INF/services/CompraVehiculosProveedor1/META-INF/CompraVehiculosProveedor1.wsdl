@@ -44,18 +44,44 @@
       		<xsd:element name="linea_total" type="xsd:int"/>
       	</xsd:sequence>
     </xsd:complexType>
+    <xsd:element name="sumarCantidad">
+    	<xsd:complexType>
+    		<xsd:sequence>
+          		<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo2"/>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
+    <xsd:element name="sumarCantidadResponse">
+    	<xsd:complexType>
+    		<xsd:sequence>
+    			<xsd:element name="total" type="xsd:int"/>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="comprobarStockRequest">
     <wsdl:part name="parameters" element="tns:comprobarStock">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="NewOperationResponse">
+    <wsdl:part name="parameters" element="tns:sumarCantidadResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="actualizarStockRequest">
     <wsdl:part name="parameters" element="tns:actualizarStock">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="sumarCantidadResponse1">
+    <wsdl:part name="parameters" element="tns:sumarCantidadResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="comprobarStockResponse">
     <wsdl:part name="parameters" element="tns:comprobarStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sumarCantidadRequest">
+    <wsdl:part name="parameters" element="tns:sumarCantidad">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="actualizarStockResponse">
@@ -75,6 +101,12 @@
       <wsdl:output message="tns:comprobarStockResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="sumarCantidad">
+      <wsdl:input message="tns:sumarCantidadRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:sumarCantidadResponse1">
+    </wsdl:output>
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CompraVehiculosProveedorSOAP" type="tns:CompraVehiculosProveedor1">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -89,6 +121,15 @@
     </wsdl:operation>
     <wsdl:operation name="comprobarStock">
       <soap:operation soapAction="http://www.example.org/CompraVehiculosProveedor/comprobarStock"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sumarCantidad">
+      <soap:operation soapAction="http://www.example.org/CompraVehiculosProveedor/sumarCantidad"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

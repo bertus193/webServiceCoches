@@ -37,41 +37,60 @@
 
         
 
+            if("sumarCantidad".equals(methodName)){
+                
+                org.example.www.compravehiculosproveedor.SumarCantidadResponse sumarCantidadResponse13 = null;
+	                        org.example.www.compravehiculosproveedor.SumarCantidad wrappedParam =
+                                                             (org.example.www.compravehiculosproveedor.SumarCantidad)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    org.example.www.compravehiculosproveedor.SumarCantidad.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               sumarCantidadResponse13 =
+                                                   
+                                                   
+                                                         skel.sumarCantidad(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), sumarCantidadResponse13, false, new javax.xml.namespace.QName("http://www.example.org/CompraVehiculosProveedor/",
+                                                    "sumarCantidad"));
+                                    } else 
+
             if("actualizarStock".equals(methodName)){
                 
-                org.example.www.compravehiculosproveedor.ActualizarStockResponse actualizarStockResponse9 = null;
+                org.example.www.compravehiculosproveedor.ActualizarStockResponse actualizarStockResponse15 = null;
 	                        org.example.www.compravehiculosproveedor.ActualizarStock wrappedParam =
                                                              (org.example.www.compravehiculosproveedor.ActualizarStock)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     org.example.www.compravehiculosproveedor.ActualizarStock.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               actualizarStockResponse9 =
+                                               actualizarStockResponse15 =
                                                    
                                                    
                                                          skel.actualizarStock(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), actualizarStockResponse9, false, new javax.xml.namespace.QName("http://www.example.org/CompraVehiculosProveedor/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), actualizarStockResponse15, false, new javax.xml.namespace.QName("http://www.example.org/CompraVehiculosProveedor/",
                                                     "actualizarStock"));
                                     } else 
 
             if("comprobarStock".equals(methodName)){
                 
-                org.example.www.compravehiculosproveedor.ComprobarStockResponse comprobarStockResponse11 = null;
+                org.example.www.compravehiculosproveedor.ComprobarStockResponse comprobarStockResponse17 = null;
 	                        org.example.www.compravehiculosproveedor.ComprobarStock wrappedParam =
                                                              (org.example.www.compravehiculosproveedor.ComprobarStock)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     org.example.www.compravehiculosproveedor.ComprobarStock.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               comprobarStockResponse11 =
+                                               comprobarStockResponse17 =
                                                    
                                                    
                                                          skel.comprobarStock(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), comprobarStockResponse11, false, new javax.xml.namespace.QName("http://www.example.org/CompraVehiculosProveedor/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), comprobarStockResponse17, false, new javax.xml.namespace.QName("http://www.example.org/CompraVehiculosProveedor/",
                                                     "comprobarStock"));
                                     
             } else {
@@ -88,6 +107,34 @@
         }
         
         //
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.compravehiculosproveedor.SumarCantidad param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.compravehiculosproveedor.SumarCantidad.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.compravehiculosproveedor.SumarCantidadResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.compravehiculosproveedor.SumarCantidadResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(org.example.www.compravehiculosproveedor.ActualizarStock param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -144,6 +191,25 @@
 
             }
         
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.compravehiculosproveedor.SumarCantidadResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(org.example.www.compravehiculosproveedor.SumarCantidadResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private org.example.www.compravehiculosproveedor.SumarCantidadResponse wrapsumarCantidad(){
+                                org.example.www.compravehiculosproveedor.SumarCantidadResponse wrappedElement = new org.example.www.compravehiculosproveedor.SumarCantidadResponse();
+                                return wrappedElement;
+                         }
+                    
                     private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.compravehiculosproveedor.ActualizarStockResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                         throws org.apache.axis2.AxisFault{
                       try{
@@ -223,6 +289,20 @@
                 if (org.example.www.compravehiculosproveedor.ComprobarStockResponse.class.equals(type)){
                 
                         return org.example.www.compravehiculosproveedor.ComprobarStockResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.compravehiculosproveedor.SumarCantidad.class.equals(type)){
+                
+                        return org.example.www.compravehiculosproveedor.SumarCantidad.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.compravehiculosproveedor.SumarCantidadResponse.class.equals(type)){
+                
+                        return org.example.www.compravehiculosproveedor.SumarCantidadResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
