@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CompraVehiculosProveedor2" targetNamespace="http://www.example.org/CompraVehiculosProveedor2/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/CompraVehiculosProveedor2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/CompraVehiculosProveedor2/">
+      <xsd:element name="actualizarStock">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="actualizarStockResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="idVehiculo" type="xsd:string"/>
+          	<xsd:element name="cantidad" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="comprobarStock">
+      	<xsd:complexType>
+      		<xsd:sequence>
+          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="comprobarStockResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo2"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    <xsd:complexType name="Vehiculo">
+      	<xsd:sequence>
+      		<xsd:element name="idVehiculo" type="xsd:string"/>
+      		<xsd:element name="cantidad" type="xsd:int"/>
+      	</xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Vehiculo2">
+      	<xsd:sequence>
+      		<xsd:element name="idVehiculo" type="xsd:string"/>
+      		<xsd:element name="linea_total" type="xsd:int"/>
+      	</xsd:sequence>
+    </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="comprobarStockResponse">
+    <wsdl:part name="parameters" element="tns:comprobarStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarStockResponse">
+    <wsdl:part name="parameters" element="tns:actualizarStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="comprobarStockRequest">
+    <wsdl:part name="parameters" element="tns:comprobarStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarStockRequest">
+    <wsdl:part name="parameters" element="tns:actualizarStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CompraVehiculosProveedor2">
+    <wsdl:operation name="actualizarStock">
+      <wsdl:input message="tns:actualizarStockRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:actualizarStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="comprobarStock">
+      <wsdl:input message="tns:comprobarStockRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:comprobarStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CompraVehiculosProveedor2SOAP" type="tns:CompraVehiculosProveedor2">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="actualizarStock">
+      <soap:operation soapAction="http://www.example.org/CompraVehiculosProveedor2/actualizarStock"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="comprobarStock">
+      <soap:operation soapAction="http://www.example.org/CompraVehiculosProveedor2/comprobarStock"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CompraVehiculosProveedor2">
+    <wsdl:port name="CompraVehiculosProveedor2SOAP" binding="tns:CompraVehiculosProveedor2SOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

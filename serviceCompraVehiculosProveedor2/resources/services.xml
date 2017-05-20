@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) --><serviceGroup>
+    <service name="CompraVehiculosProveedor2">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.compravehiculosproveedor2.CompraVehiculosProveedor2MessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.example.www.compravehiculosproveedor2.CompraVehiculosProveedor2Skeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="actualizarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/CompraVehiculosProveedor2/">
+            <actionMapping>http://www.example.org/CompraVehiculosProveedor2/actualizarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/CompraVehiculosProveedor2/CompraVehiculosProveedor2/actualizarStockResponse</outputActionMapping>
+        </operation>
+        <operation name="comprobarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/CompraVehiculosProveedor2/">
+            <actionMapping>http://www.example.org/CompraVehiculosProveedor2/comprobarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/CompraVehiculosProveedor2/CompraVehiculosProveedor2/comprobarStockResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>
