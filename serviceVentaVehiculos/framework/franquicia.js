@@ -22,6 +22,16 @@ var franquicia = {
         });
     },
 
+    getVehiculoById(idVehiculo, callback) {
+        var con = framework.getMysql().getCon();
+        framework.getMysql().getFranquicia();
+        con.query('SELECT * FROM vehiculo WHERE id = ' + idVehiculo, function (err, rows) {
+            if (err)
+                callback(err);
+            callback(undefined, rows);
+        });
+    },
+
     getFactura(idFactura, callback) {
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();
