@@ -29,8 +29,19 @@ public class Consultas {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/franquicia", usu_bd,
 					pass_bd);
 			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery("select * from vehiculo where modelo= '" + modelo + "' and marca= '" + marca
-					+ "' and disponibilidad= '" + "alquiler" + "'");
+			
+			String query = "select * from vehiculo where disponibilidad = 'alquiler'";
+			if(!marca.equals("")) {
+				query += " and marca= '" + marca + "'";
+			}
+			if(!modelo.equals("")) {
+				query += " and modelo= '" + modelo + "'";
+			}
+			if(!color.equals("")) {
+				query += " and color= '" + color + "'";
+			}
+			System.out.println(query);
+			ResultSet rs = s.executeQuery(query);
 			while(rs.next()) {
 				Vehiculo v = new Vehiculo();
 				v.setIdVehiculo(rs.getInt(1));
@@ -42,6 +53,7 @@ public class Consultas {
 				if(rs.getString(7).equals("alquiler")) {
 					lista.add(v);
 				}
+				System.out.println(v.getMarca());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
