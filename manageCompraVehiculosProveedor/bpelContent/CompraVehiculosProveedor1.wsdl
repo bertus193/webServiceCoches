@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/CompraVehiculosProveedor2/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CompraVehiculosProveedor2" targetNamespace="http://www.example.org/CompraVehiculosProveedor2/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/CompraVehiculosProveedor/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CompraVehiculosProveedor1" targetNamespace="http://www.example.org/CompraVehiculosProveedor/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://www.example.org/CompraVehiculosProveedor2/">
+    <xsd:schema targetNamespace="http://www.example.org/CompraVehiculosProveedor/">
       <xsd:element name="actualizarStock">
         <xsd:complexType>
           <xsd:sequence>
@@ -12,26 +12,26 @@
       <xsd:element name="actualizarStockResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="mensaje" type="xsd:string" />
+          	<xsd:element name="mensaje" type="xsd:string" />
           	<xsd:element name="devolver" type="xsd:boolean"></xsd:element>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="comprobarStock">
-      	<xsd:complexType>
-      		<xsd:sequence>
-          	<xsd:element name="vehiculos" type="xsd:string"></xsd:element>
-      		</xsd:sequence>
-      	</xsd:complexType>
-      </xsd:element>
-      <xsd:element name="comprobarStockResponse">
-      	<xsd:complexType>
-      		<xsd:sequence>
-          	<xsd:element name="vehiculos" type="xsd:string"></xsd:element>
-      		</xsd:sequence>
-      	</xsd:complexType>
-      </xsd:element>
     
+     <xsd:element name="comprobarStock">
+     	<xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="vehiculos" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="comprobarStockResponse">
+     	<xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="vehiculos" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+     </xsd:element>
     <xsd:element name="sumarCantidad">
     	<xsd:complexType>
     		<xsd:sequence>
@@ -57,16 +57,19 @@
   <wsdl:message name="comprobarStockRequest">
   	<wsdl:part name="parameters" element="tns:comprobarStock"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="NewOperationResponse">
+  	<wsdl:part name="parameters" element="tns:sumarCantidadResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="comprobarStockResponse">
   	<wsdl:part name="parameters" element="tns:comprobarStockResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="sumarCantidadRequest">
   	<wsdl:part name="parameters" element="tns:sumarCantidad"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="sumarCantidadResponse">
+  <wsdl:message name="sumarCantidadResponse1">
   	<wsdl:part name="parameters" element="tns:sumarCantidadResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:portType name="CompraVehiculosProveedor2">
+  <wsdl:portType name="CompraVehiculosProveedor1">
     <wsdl:operation name="actualizarStock">
       <wsdl:input message="tns:actualizarStockRequest"/>
       <wsdl:output message="tns:actualizarStockResponse"/>
@@ -77,16 +80,16 @@
     </wsdl:operation>
     <wsdl:operation name="sumarCantidad">
     	<wsdl:input message="tns:sumarCantidadRequest"></wsdl:input>
-    	<wsdl:output message="tns:sumarCantidadResponse"></wsdl:output>
+    	<wsdl:output message="tns:sumarCantidadResponse1"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="CompraVehiculosProveedor2SOAP"
-  	type="tns:CompraVehiculosProveedor2">
+  <wsdl:binding name="CompraVehiculosProveedorSOAP"
+  	type="tns:CompraVehiculosProveedor1">
   	<soap:binding style="document"
   		transport="http://schemas.xmlsoap.org/soap/http" />
   	<wsdl:operation name="actualizarStock">
   		<soap:operation
-  			soapAction="http://www.example.org/CompraVehiculosProveedor2/actualizarStock" />
+  			soapAction="http://www.example.org/CompraVehiculosProveedor/actualizarStock" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -96,7 +99,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="comprobarStock">
   		<soap:operation
-  			soapAction="http://www.example.org/CompraVehiculosProveedor2/comprobarStock" />
+  			soapAction="http://www.example.org/CompraVehiculosProveedor/comprobarStock" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -106,7 +109,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="sumarCantidad">
   		<soap:operation
-  			soapAction="http://www.example.org/CompraVehiculosProveedor2/sumarCantidad" />
+  			soapAction="http://www.example.org/CompraVehiculosProveedor/sumarCantidad" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -115,8 +118,8 @@
   		</wsdl:output>
   	</wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="CompraVehiculosProveedor2">
-    <wsdl:port binding="tns:CompraVehiculosProveedor2SOAP" name="CompraVehiculosProveedor2SOAP">
+  <wsdl:service name="CompraVehiculosProveedor1">
+    <wsdl:port binding="tns:CompraVehiculosProveedorSOAP" name="CompraVehiculosProveedorSOAP">
       <soap:address location="http://www.example.org/"/>
     </wsdl:port>
   </wsdl:service>
