@@ -12,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.json.*;
+
+
 
 /**
 *  CompraVehiculosProveedor1Skeleton java skeleton for the axisService
@@ -29,9 +32,11 @@ public class CompraVehiculosProveedor1Skeleton{
     {
     	SumarCantidadResponse salida = new SumarCantidadResponse();	
     	int cantidad = 0;
+    	JSONObject obj = new JSONObject(sumarCantidad.getVehiculos());
+    	JSONArray arr = obj.getJSONArray("vehiculos");
     	
-    	for(int i = 0; i< sumarCantidad.localVehiculos.length;i++){
-    		cantidad = cantidad + sumarCantidad.localVehiculos[i].localLinea_total;
+    	for(int i = 0; i< arr.length();i++){
+    		cantidad = cantidad + arr.getJSONObject(i).getInt("cantidad");
     	}
     	    	
     	salida.setTotal(cantidad);
@@ -52,12 +57,15 @@ public class CompraVehiculosProveedor1Skeleton{
         Connection con = mysqlConnection.getConnection("proveedorv1");
 
         boolean error = false;
+        
+    	JSONObject obj = new JSONObject(actualizarStock.getVehiculos());
+    	JSONArray arr = obj.getJSONArray("vehiculos");
     	
-        for(int i = 0; i< actualizarStock.localVehiculos.length; i++){       
+        for(int i = 0; i< arr.length(); i++){       
 	       	try {
 	       		PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad = cantidad + ? where id = ?");
-	 			prepStmt.setInt(1, actualizarStock.localVehiculos[i].getCantidad());
-	 			prepStmt.setString(2, actualizarStock.localVehiculos[i].getIdVehiculo());
+	 			prepStmt.setInt(1, arr.getJSONObject(i).getInt("cantidad"));
+	 			prepStmt.setString(2, arr.getJSONObject(i).getString("id"));
 	 			
 	 			ResultSet rs = prepStmt.executeQuery();
 	 			if(!rs.rowUpdated()){
@@ -88,26 +96,34 @@ public class CompraVehiculosProveedor1Skeleton{
     public org.example.www.compravehiculosproveedor.ComprobarStockResponse comprobarStock(org.example.www.compravehiculosproveedor.ComprobarStock comprobarStock)
     {
     	ComprobarStockResponse salida = new ComprobarStockResponse();
+    	JSONObject jo; //salida json
+    	JSONArray ja = new JSONArray();
+    	
         Connection con = mysqlConnection.getConnection("proveedorv1");
         
         int total;
         String id;
         
-        for(int i = 0; i< comprobarStock.localVehiculos.length; i++){       
+    	JSONObject obj = new JSONObject(comprobarStock.getVehiculos());
+    	JSONArray arr = obj.getJSONArray("vehiculos");
+        
+        for(int i = 0; i< arr.length(); i++){       
 	       	try {
 	 			PreparedStatement prepStmt = con.prepareStatement("SELECT id, cantidad FROM vehiculo where id = ? LIMIT 1");
-	 			prepStmt.setString(1, comprobarStock.localVehiculos[i].getIdVehiculo());
+	 			prepStmt.setString(1, arr.getJSONObject(i).getString("id"));
 	 			ResultSet rs = prepStmt.executeQuery();
 	 			if(rs.next()){
-	 				id  = rs.getString("id");
-	 				total = rs.getInt("cantidad");
-	 				salida.localVehiculos[i].localIdVehiculo = id;
-	 				salida.localVehiculos[i].localLinea_total = total;
+	 				jo = new JSONObject();
+	 				jo.put("id", rs.getString("id"));
+	 				jo.put("cantidad", rs.getInt("cantidad"));
+	 				ja.put(jo);
 	 			}	 			
 	 		} catch (SQLException e) {
 	 			System.out.println(e.getMessage());
 	 		}
         }
+        
+        salida.setVehiculos(ja.toString());
         
     	return salida;
     }
