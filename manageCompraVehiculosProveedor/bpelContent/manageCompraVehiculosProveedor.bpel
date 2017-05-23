@@ -107,12 +107,14 @@
             </bpel:sequence></bpel:flow>
         
         <bpel:if name="If">
-            <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[($P1PLResponse1.parameters/total > -1)]]></bpel:condition>
+            <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[($P1Response1.parameters/total > -1)]]></bpel:condition>
             <bpel:sequence name="Sequence">
                 
                 
                 
                 <bpel:assign validate="no" name="Assign2">
+                    
+                    
                     <bpel:copy>
                         <bpel:from><bpel:literal><tns:actualizarStock xmlns:tns="http://www.example.org/CompraVehiculosProveedor/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <vehiculos>vehiculos</vehiculos>
@@ -121,16 +123,12 @@
                         <bpel:to variable="P1Request2" part="parameters"></bpel:to>
                     </bpel:copy>
                     <bpel:copy>
-                        <bpel:from part="parameters" variable="P1Response">
-                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[vehiculos]]></bpel:query>
+                        <bpel:from part="payload" variable="input">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:vehiculos]]></bpel:query>
                         </bpel:from>
                         <bpel:to part="parameters" variable="P1Request2">
                             <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[vehiculos]]></bpel:query>
                         </bpel:to>
-                    </bpel:copy>
-                    <bpel:copy>
-                        <bpel:from></bpel:from>
-                        <bpel:to></bpel:to>
                     </bpel:copy>
                 </bpel:assign>
                 <bpel:invoke name="InvokeAStock" partnerLink="P1" operation="actualizarStock" portType="ns:CompraVehiculosProveedor1" inputVariable="P1Request2" outputVariable="P1Response2"></bpel:invoke>

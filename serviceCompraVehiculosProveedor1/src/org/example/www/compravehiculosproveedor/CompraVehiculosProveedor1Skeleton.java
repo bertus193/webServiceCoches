@@ -37,8 +37,7 @@ public class CompraVehiculosProveedor1Skeleton{
     	
     	for(int i = 0; i< arr.length();i++){
     		cantidad = cantidad + arr.getJSONObject(i).getInt("cantidad");
-    	}
-    	    	
+    	}	
     	salida.setTotal(cantidad);
     	return salida;
     }
@@ -63,12 +62,12 @@ public class CompraVehiculosProveedor1Skeleton{
     	
         for(int i = 0; i< arr.length(); i++){       
 	       	try {
-	       		PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad = cantidad + ? where id = ?");
+	       		PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad = cantidad - ? where id = ?");
 	 			prepStmt.setInt(1, arr.getJSONObject(i).getInt("cantidad"));
 	 			prepStmt.setString(2, arr.getJSONObject(i).getString("id"));
 	 			
-	 			ResultSet rs = prepStmt.executeQuery();
-	 			if(!rs.rowUpdated()){
+	 			int rs = prepStmt.executeUpdate();
+	 			if(rs == 0){
 	 				error = true;
 	 			}	 			
 	 		} catch (SQLException e) {
@@ -98,6 +97,9 @@ public class CompraVehiculosProveedor1Skeleton{
     	ComprobarStockResponse salida = new ComprobarStockResponse();
     	JSONObject jo; //salida json
     	JSONArray ja = new JSONArray();
+    	JSONObject salidaJSON = new JSONObject();
+    
+    	
     	
         Connection con = mysqlConnection.getConnection("proveedorv1");
         
@@ -122,8 +124,9 @@ public class CompraVehiculosProveedor1Skeleton{
 	 			System.out.println(e.getMessage());
 	 		}
         }
+        salidaJSON.put("vehiculos", ja);
         
-        salida.setVehiculos(ja.toString());
+        salida.setVehiculos(salidaJSON.toString());
         
     	return salida;
     }

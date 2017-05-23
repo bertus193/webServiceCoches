@@ -37,7 +37,7 @@ public class CompraVehiculosProveedor2Skeleton{
     	
         for(int i = 0; i< arr.length(); i++){       
 	       	try {
-	       		PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad = cantidad + ? where id = ?");
+	       		PreparedStatement prepStmt = con.prepareStatement("UPDATE vehiculo SET cantidad = cantidad - ? where id = ?");
 	 			prepStmt.setInt(1, arr.getJSONObject(i).getInt("cantidad"));
 	 			prepStmt.setString(2, arr.getJSONObject(i).getString("id"));
 	 			
@@ -72,6 +72,7 @@ public class CompraVehiculosProveedor2Skeleton{
     	ComprobarStockResponse salida = new ComprobarStockResponse();
     	JSONObject jo; //salida json
     	JSONArray ja = new JSONArray();
+    	JSONObject salidaJSON = new JSONObject();
     	
         Connection con = mysqlConnection.getConnection("proveedorv2");
         
@@ -97,7 +98,9 @@ public class CompraVehiculosProveedor2Skeleton{
 	 		}
         }
         
-        salida.setVehiculos(ja.toString());
+        salidaJSON.put("vehiculos", ja);
+        
+        salida.setVehiculos(salidaJSON.toString());
         
     	return salida;
     }

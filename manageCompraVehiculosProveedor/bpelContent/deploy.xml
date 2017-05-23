@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:CompraVehiculosProveedor="http://www.example.org/CompraVehiculosProveedor/" xmlns:sample="http://eclipse.org/bpel/sample">
+  <process name="sample:manageCompraVehiculosProveedor">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="sample:manageCompraVehiculosProveedorService" port="manageCompraVehiculosProveedorPort"/>
+    </provide>
+    <invoke partnerLink="P1">
+      <service name="CompraVehiculosProveedor:CompraVehiculosProveedor1" port="CompraVehiculosProveedorSOAP"/>
+    </invoke>
+  </process>
+</deploy>

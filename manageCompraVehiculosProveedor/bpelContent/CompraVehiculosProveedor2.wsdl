@@ -117,7 +117,7 @@
   </wsdl:binding>
   <wsdl:service name="CompraVehiculosProveedor2">
     <wsdl:port binding="tns:CompraVehiculosProveedor2SOAP" name="CompraVehiculosProveedor2SOAP">
-      <soap:address location="http://www.example.org/"/>
+      <soap:address location="http://127.0.0.1:9080/serviceCompraVehiculosProveedor2/services/CompraVehiculosProveedor2"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
