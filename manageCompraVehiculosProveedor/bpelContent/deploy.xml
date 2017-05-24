@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:CompraVehiculosProveedor="http://www.example.org/CompraVehiculosProveedor/" xmlns:sample="http://eclipse.org/bpel/sample">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:CompraVehiculosProveedor="http://www.example.org/CompraVehiculosProveedor/" xmlns:CompraVehiculosProveedor2="http://www.example.org/CompraVehiculosProveedor2/" xmlns:sample="http://eclipse.org/bpel/sample">
   <process name="sample:manageCompraVehiculosProveedor">
     <active>true</active>
     <retired>false</retired>
@@ -9,6 +9,9 @@
     </provide>
     <invoke partnerLink="P1">
       <service name="CompraVehiculosProveedor:CompraVehiculosProveedor1" port="CompraVehiculosProveedorSOAP"/>
+    </invoke>
+    <invoke partnerLink="P2">
+      <service name="CompraVehiculosProveedor2:CompraVehiculosProveedor2" port="CompraVehiculosProveedor2SOAP"/>
     </invoke>
   </process>
 </deploy>

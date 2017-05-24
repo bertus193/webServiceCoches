@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://eclipse.org/bpel/sample" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://www.example.org/CompraVehiculosProveedor/" name="manageCompraVehiculosProveedor" targetNamespace="http://eclipse.org/bpel/sample">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://eclipse.org/bpel/sample" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://www.example.org/CompraVehiculosProveedor/" xmlns:wsdl1="http://www.example.org/CompraVehiculosProveedor2/" name="manageCompraVehiculosProveedor" targetNamespace="http://eclipse.org/bpel/sample">
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      TYPE DEFINITION - List of types participating in this BPEL process 
@@ -10,7 +10,11 @@
     <plnk:partnerLinkType name="P1PL">
     <plnk:role name="P1Role" portType="wsdl:CompraVehiculosProveedor1"/>
   </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="P2PL">
+    <plnk:role name="P2Role" portType="wsdl1:CompraVehiculosProveedor2"/>
+  </plnk:partnerLinkType>
     <import location="CompraVehiculosProveedor1.wsdl" namespace="http://www.example.org/CompraVehiculosProveedor/"/>
+    <import location="CompraVehiculosProveedor2.wsdl" namespace="http://www.example.org/CompraVehiculosProveedor2/"/>
     <types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://eclipse.org/bpel/sample">
 
@@ -25,8 +29,8 @@
             <element name="manageCompraVehiculosProveedorResponse">
                 <complexType>
                     <sequence>
-                       <element name="mensaje" type="string" />
-          				<element name="devolver" type="boolean"></element>
+                       <element name="mensaje" type="string"/>
+          				<element name="devolver" type="boolean"/>
                     </sequence>
                 </complexType>
             </element>

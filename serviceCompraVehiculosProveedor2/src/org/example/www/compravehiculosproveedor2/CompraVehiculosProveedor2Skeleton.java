@@ -41,10 +41,10 @@ public class CompraVehiculosProveedor2Skeleton{
 	 			prepStmt.setInt(1, arr.getJSONObject(i).getInt("cantidad"));
 	 			prepStmt.setString(2, arr.getJSONObject(i).getString("id"));
 	 			
-	 			ResultSet rs = prepStmt.executeQuery();
-	 			if(!rs.rowUpdated()){
+	 			int rs = prepStmt.executeUpdate();
+	 			if(rs == 0){
 	 				error = true;
-	 			}	 			
+	 			}		 			
 	 		} catch (SQLException e) {
 	 			System.out.println(e.getMessage());
 	 		}
