@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "reqObtenerVehiculosAlquilerJSON"
+        }
+    },
+    "outputMessageMetadata": {},
+    "id": "5f2c8e1e-55d7-4756-9589-9e538b2afe32",
+    "version": "5.2.0.0"
+}
