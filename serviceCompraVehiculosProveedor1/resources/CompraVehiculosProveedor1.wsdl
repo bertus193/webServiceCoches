@@ -5,7 +5,7 @@
       <xsd:element name="actualizarStock">
         <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo"/>
+          	<xsd:element name="vehiculos" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -21,33 +21,21 @@
      <xsd:element name="comprobarStock">
      	<xsd:complexType>
           <xsd:sequence>
-          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo"/>
+          	<xsd:element name="vehiculos" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
      </xsd:element>
      <xsd:element name="comprobarStockResponse">
      	<xsd:complexType>
           <xsd:sequence>
-          	<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo2"/>
+          	<xsd:element name="vehiculos" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
      </xsd:element>
-     <xsd:complexType name="Vehiculo">
-      	<xsd:sequence>
-      		<xsd:element name="idVehiculo" type="xsd:string"/>
-      		<xsd:element name="cantidad" type="xsd:int"/>
-      	</xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="Vehiculo2">
-      	<xsd:sequence>
-      		<xsd:element name="idVehiculo" type="xsd:string"/>
-      		<xsd:element name="linea_total" type="xsd:int"/>
-      	</xsd:sequence>
-    </xsd:complexType>
     <xsd:element name="sumarCantidad">
     	<xsd:complexType>
     		<xsd:sequence>
-          		<xsd:element maxOccurs="unbounded" minOccurs="0" name="vehiculos" type="tns:Vehiculo2"/>
+          		<xsd:element name="vehiculos" type="xsd:string"/>
     		</xsd:sequence>
     	</xsd:complexType>
     </xsd:element>

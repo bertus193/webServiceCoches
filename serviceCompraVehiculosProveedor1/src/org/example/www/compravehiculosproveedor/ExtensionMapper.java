@@ -21,26 +21,6 @@
                                                        javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
 
               
-                  if (
-                  "http://www.example.org/CompraVehiculosProveedor/".equals(namespaceURI) &&
-                  "Vehiculo2".equals(typeName)){
-                   
-                            return  org.example.www.compravehiculosproveedor.Vehiculo2.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://www.example.org/CompraVehiculosProveedor/".equals(namespaceURI) &&
-                  "Vehiculo".equals(typeName)){
-                   
-                            return  org.example.www.compravehiculosproveedor.Vehiculo.Factory.parse(reader);
-                        
-
-                  }
-
-              
              throw new org.apache.axis2.databinding.ADBException("Unsupported type " + namespaceURI + " " + typeName);
           }
 
