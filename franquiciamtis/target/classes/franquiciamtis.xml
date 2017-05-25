@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
-http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/current/mule-jersey.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
-    <ws:consumer-config name="Web_Service_Consumer" service="AlquilerVehiculos" port="AlquilerVehiculosSOAP" serviceAddress="http://localhost:9080/serviceAlquilerVehiculos/services/AlquilerVehiculos/" wsdlLocation="http://localhost:9080/serviceAlquilerVehiculos/services/AlquilerVehiculos?wsdl" doc:name="Web Service Consumer"/>
+    <http:request-config name="HTTP_Request_Configuration" host="127.0.0.1" port="3000" doc:name="HTTP Request Configuration"/>
+    <ws:consumer-config name="Web_Service_Consumer" service="manageCompraVehiculosProveedor" port="manageCompraVehiculosProveedorPort" serviceAddress="http://127.0.0.1:8080/ode/processes/manageCompraVehiculosProveedor.manageCompraVehiculosProveedorPort/" wsdlLocation="http://127.0.0.1:8080/ode/processes/manageCompraVehiculosProveedor?wsdl" doc:name="Web Service Consumer"/>
     <flow name="franquiciamtisFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="*" doc:name="HTTP"/>
         <set-variable variableName="params" value="#[message.inboundProperties.'http.request.path']" doc:name="Variable"/>
@@ -18,12 +22,93 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
             <when expression="#[flowVars.params == &quot;/obtenerVehiculosAlquiler&quot;]">
                 <flow-ref name="flowObtenerVehiculosAlquiler" doc:name="flowObtenerVehiculosAlquiler"/>
             </when>
+            <when expression="#[flowVars.params == &quot;/stockVehiculo&quot;]">
+                <flow-ref name="stockVehiculo" doc:name="stockVehiculo"/>
+            </when>
+            <when expression="#[flowVars.params == &quot;/comprarVehiculo&quot;]">
+                <flow-ref name="comprarVehiculo" doc:name="comprarVehiculo"/>
+            </when>
+            <when expression="#[flowVars.params == &quot;/generarFactura&quot;]">
+                <flow-ref name="generarFactura" doc:name="generarFactura"/>
+            </when>
             <otherwise>
                 <set-payload value="&quot;El flujo introducido no existe&quot;" doc:name="Set Payload"/>
             </otherwise>
         </choice>
     </flow>
-    <sub-flow name="flowObtenerVehiculosAlquiler">
+    <sub-flow name="stockVehiculo">
+        <set-variable variableName="marca" value="#[message.inboundProperties.'http.query.params'.marca]" doc:name="marca"/>
+        <set-variable variableName="modelo" value="#[message.inboundProperties.'http.query.params'.modelo]" doc:name="modelo"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="GET" doc:name="Comprobar Stock">
+            <http:request-builder>
+                <http:query-param paramName="marca" value="#[flowVars.marca]"/>
+                <http:query-param paramName="modelo" value="#[flowVars.modelo]"/>
+            </http:request-builder>
+        </http:request>
+        <set-variable variableName="salida" value="#[message.payloadAs(java.lang.String)]" doc:name="salida"/>
+        <json:json-to-object-transformer returnClass="java.lang.Object" doc:name="JSON to Object"/>
+        <set-variable variableName="cantidad" value="#[message.payload[0].cantidad]" doc:name="cantidad"/>
+        <set-variable variableName="id" value="#[message.payload[0].cantidad]" doc:name="id"/>
+<logger message="Total: #[message.payload[0].cantidad]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars.cantidad &lt;= 0]">
+                <flow-ref name="pedidoProveedor" doc:name="pedidoProveedor"/>
+            </when>
+            <otherwise>
+                <set-payload value="#[message.payloadAs(java.lang.String)]" doc:name="Set Payload"/>
+            </otherwise>
+        </choice>
+    </sub-flow>
+    <sub-flow name="pedidoProveedor">
+        <set-payload value="{&quot;vehiculos&quot;: [{ &quot;id&quot;:&quot;#[message.payload[0].id]&quot; , &quot;cantidad&quot;:1}] }" doc:name="Pedido Payload"/>
+        <logger message="#[payload]" level="INFO" doc:name="Log Payload"/>
+        <dw:transform-message metadata:id="15236c5e-0f2f-4818-9bb4-e047701a8784" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/java"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://eclipse.org/bpel/sample
+---
+{
+	ns0#manageCompraVehiculosProveedorRequest: {
+		ns0#vehiculos: payload
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Pedido Franquicia BPEL"/>
+        <set-variable variableName="salidaProveedor" value="#[message.payloadAs(java.lang.String)]" doc:name="salidaProveedor"/>
+        <set-payload value="{&quot;vehiculos&quot;: [{ &quot;id&quot;:&quot;#[flowVars.id]&quot; , &quot;cantidad&quot;:1}] }" doc:name="Actualizar Stock franquicia Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="sumar a Franquicia">
+            <http:request-builder>
+                <http:header headerName="Content-Type" value="x-www-form-urlencoded"/>
+            </http:request-builder>
+        </http:request>
+        <set-payload value="#[flowVars.salidaProveedor]" doc:name="Set Payload"/>
+    </sub-flow>
+    <sub-flow name="comprarVehiculo">
+    	<set-variable variableName="vehiculos" value="#[message.inboundProperties.'http.query.params'.idFactura]" doc:name="Variable"/>
+        <set-payload value="#[flowVars.vehiculos]" doc:name="Set Payload"/>
+        
+        <http:request config-ref="HTTP_Request_Configuration" path="/pedido" method="PUT" doc:name="pedido Franquicia"/>
+        <set-variable variableName="idFactura" value="#[payload]" doc:name="Variable"/>
+        <set-payload value="#[flowVars.vehiculos]" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="actualizar Stock Franquicia">
+            <http:request-builder>
+                <http:header headerName="Content-Type" value="x-www-form-urlencoded"/>
+            </http:request-builder>
+        </http:request>
+    </sub-flow>
+    <sub-flow name="generarFactura">
+        <set-variable variableName="idFactura" value="#[message.inboundProperties.'http.query.params'.idFactura]" doc:name="idFactura"/>
+        <set-payload value="#[flowVars.idFactura] : 1" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/factura" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="idFactura" value="1"/>
+                <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
+            </http:request-builder>
+        </http:request>
+    </sub-flow>
+    
+        <sub-flow name="flowObtenerVehiculosAlquiler">
         <dw:transform-message metadata:id="5f2c8e1e-55d7-4756-9589-9e538b2afe32" doc:name="Transform Message">
             <dw:input-payload mimeType="application/json"/>
             <dw:set-payload><![CDATA[%dw 1.0

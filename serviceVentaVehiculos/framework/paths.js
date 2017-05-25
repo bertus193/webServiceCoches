@@ -22,7 +22,7 @@ app.get('/stock', function (req, res) {
 		if (err) {
 			res.send(err)
 		}
-		else if (result[0].cantidad == null) {
+		else if (result[0] == null) {
 			res.send("No hay stock");
 		}
 		else {
@@ -58,9 +58,9 @@ app.get('/presupuesto', function (req, res) {
 })
 
 //PEDIDO A FRANQUICIA VEHICULO(PUT)
-app.put('/pedidoF', function (req, res) {
+app.put('/pedido', function (req, res) {
 	var body = req.body
-	var result = []
+	//var result = []
 
 	framework.getFranquicia().nuevoPedidoCliente(body["idCliente"], "venta", function (err, idInsert) {
 		if (err) {
@@ -69,8 +69,10 @@ app.put('/pedidoF', function (req, res) {
 		else {
 			(function next(i) {
 				if (i == body["vehiculos"].length) {
-					res.contentType('application/json');
-					res.send(JSON.stringify(result));
+					res.send((idInsert).toString())
+					//res.contentType('application/json');
+					//result.push({ idFactura: idInsert })
+					//res.send(JSON.stringify(result));
 				}
 				else {
 					framework.getFranquicia().getVehiculoById(body["vehiculos"][i]["idVehiculo"], function (err, vehiculo) {
@@ -90,7 +92,7 @@ app.put('/pedidoF', function (req, res) {
 								if (err) {
 									res.send(err)
 								}
-								result.push({ idVehiculo: body["vehiculos"][i]["idVehiculo"], cantidad: body["vehiculos"][i]["cantidad"] });
+								//result.push({ idVehiculo: body["vehiculos"][i]["idVehiculo"], cantidad: body["vehiculos"][i]["cantidad"] });
 								next(i + 1)
 							})
 						}
@@ -154,7 +156,7 @@ app.put('/pedidoP', function (req, res) {
 
 
 //MODIFICAR (ACTUALIZA) STOCK FRANQUICIA (POST)
-app.post('/stockF', function (req, res) {
+app.post('/stock', function (req, res) {
 	var body = req.body;
 
 	var result = [];
@@ -232,7 +234,7 @@ app.post('/stockP', function (req, res) {
 //GENERA FACTURA (PUT)
 app.put('/factura/', function (req, res) {
 	var idFactura = req.body.idFactura
-	//console.log(req.body)
+	console.log(req.body)
 
 	framework.getFranquicia().getFactura(idFactura, function (err, factura) {
 		if (err) {
