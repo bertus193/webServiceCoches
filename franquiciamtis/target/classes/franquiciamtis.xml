@@ -99,7 +99,7 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
     </sub-flow>
     <sub-flow name="generarFactura">
         <set-variable variableName="idFactura" value="#[message.inboundProperties.'http.query.params'.idFactura]" doc:name="idFactura"/>
-        <set-payload value="#[flowVars.idFactura] : 1" doc:name="Set Payload"/>
+        <set-payload value="#[['idFactura' : flowVars.idFactura]]" doc:name="Set Payload"/>
         <http:request config-ref="HTTP_Request_Configuration" path="/factura" method="PUT" doc:name="HTTP">
             <http:request-builder>
                 <http:query-param paramName="idFactura" value="1"/>
