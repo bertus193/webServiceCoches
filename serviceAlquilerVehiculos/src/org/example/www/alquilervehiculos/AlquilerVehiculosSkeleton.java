@@ -84,5 +84,28 @@ public class AlquilerVehiculosSkeleton {
 		
 		return ov;
 	}
+	
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param generarPresupuesto
+	 * @return generarPresupuestoResponse
+	 */
+
+	public org.example.www.alquilervehiculos.GenerarPresupuestoResponse generarPresupuesto(
+			org.example.www.alquilervehiculos.GenerarPresupuesto generarPresupuesto) {
+		
+		VehiculosAsignados[] vehiculos = generarPresupuesto.getVehiculos();
+		
+		org.example.www.alquilervehiculos.persistencia.Consultas consulta = new org.example.www.alquilervehiculos.persistencia.Consultas();
+		
+		float precio = consulta.generarPresupuesto(vehiculos);
+		
+		GenerarPresupuestoResponse gp = new GenerarPresupuestoResponse();
+		
+		gp.setPrecio(precio);
+		
+		return gp;
+	}
 
 }

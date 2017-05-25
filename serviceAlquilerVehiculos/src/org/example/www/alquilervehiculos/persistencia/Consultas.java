@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 
 import org.example.www.alquilervehiculos.Asignacion;
 import org.example.www.alquilervehiculos.Vehiculo;
+import org.example.www.alquilervehiculos.VehiculosAsignados;
 
 public class Consultas {
 	private final String usu_bd = "root";
@@ -103,6 +104,38 @@ public class Consultas {
 			e.printStackTrace();
 		}
 		return asignado;
+	}
+	
+	public float generarPresupuesto(VehiculosAsignados[] vehiculos) {
+		float precioTotal = 0.0f;
+		float precio = 0.0f;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/franquicia", usu_bd,
+					pass_bd);
+			Statement s = conexion.createStatement();
+			
+			String query = "select * from vehiculo where";
+			for(int i = 0; i < vehiculos.length; i++) {
+				if(i == 0) {
+					query += " id= '" + vehiculos[i].getIdVehiculo() + "'";
+				}
+				else {
+					query += " or id= '" + vehiculos[i].getIdVehiculo() + "'";
+				}
+			}
+			ResultSet rs = s.executeQuery(query);
+			while(rs.next()) {
+				precio = rs.getFloat("precio");
+				precioTotal += precio;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return precioTotal;
 	}
 
 }

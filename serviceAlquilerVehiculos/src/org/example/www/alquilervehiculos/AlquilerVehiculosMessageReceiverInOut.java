@@ -37,34 +37,51 @@ public class AlquilerVehiculosMessageReceiverInOut extends org.apache.axis2.rece
 
 				if ("asignarVehiculos".equals(methodName)) {
 
-					org.example.www.alquilervehiculos.AsignarVehiculosResponse asignarVehiculosResponse9 = null;
+					org.example.www.alquilervehiculos.AsignarVehiculosResponse asignarVehiculosResponse13 = null;
 					org.example.www.alquilervehiculos.AsignarVehiculos wrappedParam = (org.example.www.alquilervehiculos.AsignarVehiculos) fromOM(
 							msgContext.getEnvelope().getBody().getFirstElement(),
 							org.example.www.alquilervehiculos.AsignarVehiculos.class,
 							getEnvelopeNamespaces(msgContext.getEnvelope()));
 
-					asignarVehiculosResponse9 =
+					asignarVehiculosResponse13 =
 
 					skel.asignarVehiculos(wrappedParam);
 
-					envelope = toEnvelope(getSOAPFactory(msgContext), asignarVehiculosResponse9, false,
+					envelope = toEnvelope(getSOAPFactory(msgContext), asignarVehiculosResponse13, false,
 							new javax.xml.namespace.QName("http://www.example.org/AlquilerVehiculos/",
 									"asignarVehiculos"));
 				} else
 
+				if ("generarPresupuesto".equals(methodName)) {
+
+					org.example.www.alquilervehiculos.GenerarPresupuestoResponse generarPresupuestoResponse15 = null;
+					org.example.www.alquilervehiculos.GenerarPresupuesto wrappedParam = (org.example.www.alquilervehiculos.GenerarPresupuesto) fromOM(
+							msgContext.getEnvelope().getBody().getFirstElement(),
+							org.example.www.alquilervehiculos.GenerarPresupuesto.class,
+							getEnvelopeNamespaces(msgContext.getEnvelope()));
+
+					generarPresupuestoResponse15 =
+
+					skel.generarPresupuesto(wrappedParam);
+
+					envelope = toEnvelope(getSOAPFactory(msgContext), generarPresupuestoResponse15, false,
+							new javax.xml.namespace.QName("http://www.example.org/AlquilerVehiculos/",
+									"generarPresupuesto"));
+				} else
+
 				if ("obtenerVehiculos".equals(methodName)) {
 
-					org.example.www.alquilervehiculos.ObtenerVehiculosResponse obtenerVehiculosResponse11 = null;
+					org.example.www.alquilervehiculos.ObtenerVehiculosResponse obtenerVehiculosResponse17 = null;
 					org.example.www.alquilervehiculos.ObtenerVehiculos wrappedParam = (org.example.www.alquilervehiculos.ObtenerVehiculos) fromOM(
 							msgContext.getEnvelope().getBody().getFirstElement(),
 							org.example.www.alquilervehiculos.ObtenerVehiculos.class,
 							getEnvelopeNamespaces(msgContext.getEnvelope()));
 
-					obtenerVehiculosResponse11 =
+					obtenerVehiculosResponse17 =
 
 					skel.obtenerVehiculos(wrappedParam);
 
-					envelope = toEnvelope(getSOAPFactory(msgContext), obtenerVehiculosResponse11, false,
+					envelope = toEnvelope(getSOAPFactory(msgContext), obtenerVehiculosResponse17, false,
 							new javax.xml.namespace.QName("http://www.example.org/AlquilerVehiculos/",
 									"obtenerVehiculos"));
 
@@ -97,6 +114,30 @@ public class AlquilerVehiculosMessageReceiverInOut extends org.apache.axis2.rece
 
 		try {
 			return param.getOMElement(org.example.www.alquilervehiculos.AsignarVehiculosResponse.MY_QNAME,
+					org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+		} catch (org.apache.axis2.databinding.ADBException e) {
+			throw org.apache.axis2.AxisFault.makeFault(e);
+		}
+
+	}
+
+	private org.apache.axiom.om.OMElement toOM(org.example.www.alquilervehiculos.GenerarPresupuesto param,
+			boolean optimizeContent) throws org.apache.axis2.AxisFault {
+
+		try {
+			return param.getOMElement(org.example.www.alquilervehiculos.GenerarPresupuesto.MY_QNAME,
+					org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+		} catch (org.apache.axis2.databinding.ADBException e) {
+			throw org.apache.axis2.AxisFault.makeFault(e);
+		}
+
+	}
+
+	private org.apache.axiom.om.OMElement toOM(org.example.www.alquilervehiculos.GenerarPresupuestoResponse param,
+			boolean optimizeContent) throws org.apache.axis2.AxisFault {
+
+		try {
+			return param.getOMElement(org.example.www.alquilervehiculos.GenerarPresupuestoResponse.MY_QNAME,
 					org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -149,6 +190,26 @@ public class AlquilerVehiculosMessageReceiverInOut extends org.apache.axis2.rece
 	}
 
 	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory,
+			org.example.www.alquilervehiculos.GenerarPresupuestoResponse param, boolean optimizeContent,
+			javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
+		try {
+			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+
+			emptyEnvelope.getBody().addChild(
+					param.getOMElement(org.example.www.alquilervehiculos.GenerarPresupuestoResponse.MY_QNAME, factory));
+
+			return emptyEnvelope;
+		} catch (org.apache.axis2.databinding.ADBException e) {
+			throw org.apache.axis2.AxisFault.makeFault(e);
+		}
+	}
+
+	private org.example.www.alquilervehiculos.GenerarPresupuestoResponse wrapGenerarPresupuesto() {
+		org.example.www.alquilervehiculos.GenerarPresupuestoResponse wrappedElement = new org.example.www.alquilervehiculos.GenerarPresupuestoResponse();
+		return wrappedElement;
+	}
+
+	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory,
 			org.example.www.alquilervehiculos.ObtenerVehiculosResponse param, boolean optimizeContent,
 			javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 		try {
@@ -190,6 +251,20 @@ public class AlquilerVehiculosMessageReceiverInOut extends org.apache.axis2.rece
 			if (org.example.www.alquilervehiculos.AsignarVehiculosResponse.class.equals(type)) {
 
 				return org.example.www.alquilervehiculos.AsignarVehiculosResponse.Factory
+						.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (org.example.www.alquilervehiculos.GenerarPresupuesto.class.equals(type)) {
+
+				return org.example.www.alquilervehiculos.GenerarPresupuesto.Factory
+						.parse(param.getXMLStreamReaderWithoutCaching());
+
+			}
+
+			if (org.example.www.alquilervehiculos.GenerarPresupuestoResponse.class.equals(type)) {
+
+				return org.example.www.alquilervehiculos.GenerarPresupuestoResponse.Factory
 						.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}

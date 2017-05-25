@@ -10,6 +10,10 @@
             <actionMapping>http://www.example.org/AlquilerVehiculos/AsignarVehiculos</actionMapping>
             <outputActionMapping>http://www.example.org/AlquilerVehiculos/AlquilerVehiculos/AsignarVehiculosResponse</outputActionMapping>
         </operation>
+        <operation name="GenerarPresupuesto" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/AlquilerVehiculos/">
+            <actionMapping>http://www.example.org/AlquilerVehiculos/GenerarPresupuesto</actionMapping>
+            <outputActionMapping>http://www.example.org/AlquilerVehiculos/AlquilerVehiculos/GenerarPresupuestoResponse</outputActionMapping>
+        </operation>
         <operation name="ObtenerVehiculos" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/AlquilerVehiculos/">
             <actionMapping>http://www.example.org/AlquilerVehiculos/ObtenerVehiculos</actionMapping>
             <outputActionMapping>http://www.example.org/AlquilerVehiculos/AlquilerVehiculos/ObtenerVehiculosResponse</outputActionMapping>

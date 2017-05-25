@@ -63,6 +63,24 @@
       		<xsd:element name="idVehiculo" type="xsd:int"></xsd:element>
       	</xsd:sequence>
       </xsd:complexType>
+      <xsd:element name="GenerarPresupuesto">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="vehiculos"
+      				type="tns:VehiculosAsignados" maxOccurs="unbounded" minOccurs="0">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GenerarPresupuestoResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="precio" type="xsd:float"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ObtenerVehiculosRequest">
@@ -77,6 +95,12 @@
   <wsdl:message name="AsignarVehiculosResponse">
   	<wsdl:part name="parameters" element="tns:AsignarVehiculosResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GenerarPresupuestoRequest">
+  	<wsdl:part name="parameters" element="tns:GenerarPresupuesto"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GenerarPresupuestoResponse">
+  	<wsdl:part name="parameters" element="tns:GenerarPresupuestoResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="AlquilerVehiculos">
     <wsdl:operation name="ObtenerVehiculos">
       <wsdl:input message="tns:ObtenerVehiculosRequest"/>
@@ -85,6 +109,10 @@
     <wsdl:operation name="AsignarVehiculos">
     	<wsdl:input message="tns:AsignarVehiculosRequest"></wsdl:input>
     	<wsdl:output message="tns:AsignarVehiculosResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerarPresupuesto">
+    	<wsdl:input message="tns:GenerarPresupuestoRequest"></wsdl:input>
+    	<wsdl:output message="tns:GenerarPresupuestoResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="AlquilerVehiculosSOAP"
@@ -104,6 +132,16 @@
   	<wsdl:operation name="AsignarVehiculos">
   		<soap:operation
   			soapAction="http://www.example.org/AlquilerVehiculos/AsignarVehiculos" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GenerarPresupuesto">
+  		<soap:operation
+  			soapAction="http://www.example.org/AlquilerVehiculos/GenerarPresupuesto" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
