@@ -60,39 +60,47 @@ app.get('/presupuesto', function (req, res) {
 //PEDIDO A FRANQUICIA VEHICULO(PUT)
 app.put('/pedido', function (req, res) {
 	var body = req.body
+	var stringified = JSON.stringify(body)
+	stringified = stringified.replace('"[', '[')
+	stringified = stringified.replace(']"', ']')
+	stringified = stringified.split('\\"').join('"');
+	stringified = stringified.replace('"{', '{')
+	stringified = stringified.replace('}"', '}')
+	body = JSON.parse(stringified)
 	//var result = []
 
-	framework.getFranquicia().nuevoPedidoCliente(body["idCliente"], "venta", function (err, idInsert) {
+	framework.getFranquicia().nuevoPedidoCliente(body["data"]["idCliente"], "venta", function (err, idInsert) {
 		if (err) {
 			res.send(err)
 		}
 		else {
 			(function next(i) {
-				if (i == body["vehiculos"].length) {
+				if (i == body["data"]["vehiculos"].length) {
+					console.log((idInsert).toString());
 					res.send((idInsert).toString())
 					//res.contentType('application/json');
 					//result.push({ idFactura: idInsert })
 					//res.send(JSON.stringify(result));
 				}
 				else {
-					framework.getFranquicia().getVehiculoById(body["vehiculos"][i]["idVehiculo"], function (err, vehiculo) {
+					framework.getFranquicia().getVehiculoById(body["data"]["vehiculos"][i]["idVehiculo"], function (err, vehiculo) {
 						if (err) {
 							res.send(err)
 						}
 						else if (vehiculo[0].cantidad == null || vehiculo[0].cantidad <= 0) {
-							console.log("[Error]No hay stock para el vehiculo" + body["vehiculos"][i]["idVehiculo"])
-							next(i + 1)
+							res.send("[Error]No hay stock para el vehiculo " + body["data"]["vehiculos"][i]["idVehiculo"])
+							//next(i + 1)
 						}
-						else if (vehiculo[0].cantidad - body["vehiculos"][i]["cantidad"] < 0) {
-							console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["idVehiculo"])
-							next(i + 1)
+						else if (vehiculo[0].cantidad - body["data"]["vehiculos"][i]["cantidad"] < 0) {
+							res.send("[Error]No hay suficiente stock para el vehiculo " + body["data"]["vehiculos"][i]["idVehiculo"])
+							//next(i + 1)
 						}
 						else {
-							framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
+							framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["data"]["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
 								if (err) {
 									res.send(err)
 								}
-								//result.push({ idVehiculo: body["vehiculos"][i]["idVehiculo"], cantidad: body["vehiculos"][i]["cantidad"] });
+								//result.push({ idVehiculo: body["data"]["vehiculos"][i]["idVehiculo"], cantidad: body["data"]["vehiculos"][i]["cantidad"] });
 								next(i + 1)
 							})
 						}
@@ -119,30 +127,30 @@ app.put('/pedidoP', function (req, res) {
 		}
 		else {
 			(function next(i) {
-				if (i == body["vehiculos"].length) {
+				if (i == body["data"]["vehiculos"].length) {
 					res.contentType('application/json');
 					res.send(JSON.stringify(result));
 				}
 				else {
-					proveedor.getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
+					proveedor.getVehiculo(body["data"]["vehiculos"][i]["marca"], body["data"]["vehiculos"][i]["modelo"], function (err, vehiculo) {
 						if (err) {
 							res.send(err)
 						}
 						else if (vehiculo[0].cantidad == null || vehiculo[0].cantidad <= 0) {
-							console.log("[Error]No hay stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+							console.log("[Ped][Error]No hay stock para el vehiculo " + body["data"]["vehiculos"][i]["marca"] + " " + body["data"]["vehiculos"][i]["modelo"])
 							next(i + 1)
 						}
-						else if (vehiculo[0].cantidad - body["vehiculos"][i]["cantidad"] < 0) {
-							console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+						else if (vehiculo[0].cantidad + body["data"]["vehiculos"][i]["cantidad"] < 0) {
+							console.log("[Ped][Error]No hay suficiente stock para el vehiculo " + body["data"]["vehiculos"][i]["marca"] + " " + body["data"]["vehiculos"][i]["modelo"])
 							next(i + 1)
 						}
 						else {
-							framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
+							framework.getFranquicia().addVehiculoPedido(idInsert, vehiculo[0].id, body["data"]["vehiculos"][i]["cantidad"], vehiculo[0].precio, function (err, idInsert) {
 								if (err) {
 									res.send(err)
 								}
 								else {
-									result.push({ marca: body["vehiculos"][i]["marca"], modelo: body["vehiculos"][i]["modelo"], cantidad: body["vehiculos"][i]["cantidad"] });
+									result.push({ marca: body["data"]["vehiculos"][i]["marca"], modelo: body["data"]["vehiculos"][i]["modelo"], cantidad: body["data"]["vehiculos"][i]["cantidad"] });
 									next(i + 1)
 								}
 							})
@@ -158,36 +166,38 @@ app.put('/pedidoP', function (req, res) {
 //MODIFICAR (ACTUALIZA) STOCK FRANQUICIA (POST)
 app.post('/stock', function (req, res) {
 	var body = req.body;
-	stringified = JSON.stringify(body)
+	var stringified = JSON.stringify(body)
 	stringified = stringified.replace('"[', '[')
 	stringified = stringified.replace(']"', ']')
 	stringified = stringified.split('\\"').join('"');
+	stringified = stringified.replace('"{', '{')
+	stringified = stringified.replace('}"', '}')
 	body = JSON.parse(stringified)
 	var result = [];
 
 	(function next(i) {
-		if (i == body["vehiculos"].length) {
+		if (i == body["data"]["vehiculos"].length) {
 			res.contentType('application/json');
 			res.send(JSON.stringify(result));
 		}
 		else {
-			framework.getFranquicia().getVehiculoById(body["vehiculos"][i]["idVehiculo"], function (err, vehiculo) {
+			framework.getFranquicia().getVehiculoById(body["data"]["vehiculos"][i]["idVehiculo"], function (err, vehiculo) {
 				if (err) {
 					res.send(err)
 				}
 				else if (vehiculo[0] == null) {
-					console.log("No existe el vehiculo " + body["vehiculos"][i]["idVehiculo"])
-					next(i + 1)
+					res.send("[Stock][Error]No existe el vehiculo " + body["data"]["vehiculos"][i]["idVehiculo"])
+					//next(i + 1)
 				}
-				else if (vehiculo[0].cantidad + body["vehiculos"][i]["cantidad"] < 0) { //Puede ser negativo
-					console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["idVehiculo"])
-					next(i + 1)
+				else if (vehiculo[0].cantidad + body["data"]["vehiculos"][i]["cantidad"] < 0) { //Puede ser negativo
+					res.send("[Stock][Error]No hay suficiente stock para el vehiculo " + body["data"]["vehiculos"][i]["idVehiculo"])
+					//next(i + 1)
 				}
 				else {
-					framework.getFranquicia().actualizarStockVehiculo(vehiculo[0].id, body["vehiculos"][i]["cantidad"], function (err, rows) {
+					framework.getFranquicia().actualizarStockVehiculo(vehiculo[0].id, body["data"]["vehiculos"][i]["cantidad"], function (err, rows) {
 						if (err)
 							res.send(err)
-						result.push({ idVehiculo: vehiculo[0].id, cantidad: -body["vehiculos"][i]["cantidad"] });
+						result.push({ idVehiculo: vehiculo[0].id, cantidad: -body["data"]["vehiculos"][i]["cantidad"] });
 						next(i + 1)
 					})
 				}
@@ -205,28 +215,28 @@ app.post('/stockP', function (req, res) {
 	proveedor.setNum(proveedorNum);
 
 	(function next(i) {
-		if (i == body["vehiculos"].length) {
+		if (i == body["data"]["vehiculos"].length) {
 			res.contentType('application/json');
 			res.send(JSON.stringify(result));
 		}
 		else {
-			proveedor.getVehiculo(body["vehiculos"][i]["marca"], body["vehiculos"][i]["modelo"], function (err, vehiculo) {
+			proveedor.getVehiculo(body["data"]["vehiculos"][i]["marca"], body["data"]["vehiculos"][i]["modelo"], function (err, vehiculo) {
 				if (err) {
 					res.send(err)
 				}
 				else if (vehiculo[0].cantidad == null) {
-					console.log("No existe el vehiculo " + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+					console.log("[Stock][Error]No existe el vehiculo " + body["data"]["vehiculos"][i]["marca"] + " " + body["data"]["vehiculos"][i]["modelo"])
 					next(i + 1)
 				}
-				else if (vehiculo[0].cantidad + body["vehiculos"][i]["cantidad"] < 0) { //Puede ser negativo
-					console.log("[Error]No hay suficiente stock para el vehiculo" + body["vehiculos"][i]["marca"] + " " + body["vehiculos"][i]["modelo"])
+				else if (vehiculo[0].cantidad + body["data"]["vehiculos"][i]["cantidad"] < 0) { //Puede ser negativo
+					console.log("[Stock][Error]No hay suficiente stock para el vehiculo" + body["data"]["vehiculos"][i]["marca"] + " " + body["data"]["vehiculos"][i]["modelo"])
 					next(i + 1)
 				}
 				else {
-					proveedor.actualizarStockVehiculo(vehiculo[0].id, body["vehiculos"][i]["cantidad"], function (err, rows) {
+					proveedor.actualizarStockVehiculo(vehiculo[0].id, body["data"]["vehiculos"][i]["cantidad"], function (err, rows) {
 						if (err)
 							res.send(err)
-						result.push({ idVehiculo: vehiculo[0].id, cantidad: body["vehiculos"][i]["cantidad"] });
+						result.push({ idVehiculo: vehiculo[0].id, cantidad: body["data"]["vehiculos"][i]["cantidad"] });
 						next(i + 1)
 					})
 				}

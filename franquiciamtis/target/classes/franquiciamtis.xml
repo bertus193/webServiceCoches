@@ -85,7 +85,7 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
         <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Pedido Franquicia BPEL"/>
         <set-variable variableName="salidaProveedor" value="#[message.payloadAs(java.lang.String)]" doc:name="salidaProveedor"/>
         <set-variable variableName="stockVehiculo" value="[{ &quot;idVehiculo&quot;:&quot;#[flowVars.id]&quot; , &quot;cantidad&quot;:1}]" doc:name="Stock Vehiculo"/>
-        <set-payload value="#[[&quot;vehiculos&quot;: flowVars.stockVehiculo]]" doc:name="Actualizar Stock franquicia Payload"/>
+        <set-payload value="#[[&quot;data&quot;: flowVars.stockVehiculo]]" doc:name="Actualizar Stock franquicia Payload"/>
         <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="stockFranquicia+">
             <http:request-builder>
                 <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
@@ -94,17 +94,16 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
         <set-payload value="#[flowVars.salidaProveedor]" doc:name="Set Payload"/>
     </sub-flow>
     <sub-flow name="comprarVehiculo">
-    	<set-variable variableName="vehiculos" value="#[message.inboundProperties.'http.query.params'.idFactura]" doc:name="Variable"/>
-        <set-payload value="#[['vehiculos' : flowVars.vehiculos]]" doc:name="Set Payload"/>
+    	<set-variable variableName="vehiculos" value="#[message.inboundProperties.'http.query.params'.vehiculos]" doc:name="vehiculos"/>
+        <set-payload value="#[['data' : flowVars.vehiculos]]" doc:name="Set Payload"/>
         
         <http:request config-ref="HTTP_Request_Configuration" path="/pedido" method="PUT" doc:name="pedido Franquicia">
            <http:request-builder>
-                <http:query-param paramName="idFactura" value="1"/>
                 <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
             </http:request-builder>
         </http:request>
-        <set-variable variableName="idFactura" value="#[payload]" doc:name="Variable"/>
-        <set-payload value="#[['vehiculos' : flowVars.vehiculos]]" doc:name="Set Payload"/>
+        <set-variable variableName="idFactura" value="#[payload]" doc:name="idFactura"/>
+        <set-payload value="#[['data' : flowVars.vehiculos]]" doc:name="Set Payload"/>
         <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="actualizar Stock Franquicia">
             <http:request-builder>
                 <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
