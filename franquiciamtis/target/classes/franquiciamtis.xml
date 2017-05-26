@@ -109,13 +109,13 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
                 <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
             </http:request-builder>
         </http:request>
+        <set-payload value="#[flowVars.idFactura]" doc:name="Devolver id Factura"/>
     </sub-flow>
     <sub-flow name="generarFactura">
         <set-variable variableName="idFactura" value="#[message.inboundProperties.'http.query.params'.idFactura]" doc:name="idFactura"/>
         <set-payload value="#[['idFactura' : flowVars.idFactura]]" doc:name="Set Payload"/>
         <http:request config-ref="HTTP_Request_Configuration" path="/factura" method="PUT" doc:name="HTTP">
             <http:request-builder>
-                <http:query-param paramName="idFactura" value="1"/>
                 <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
             </http:request-builder>
         </http:request>

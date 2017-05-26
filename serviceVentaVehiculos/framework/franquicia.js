@@ -66,7 +66,7 @@ var franquicia = {
         var total_linea = precioVehiculo * cantidad;
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();
-        con.query('INSERT INTO linea_factura (idFactura, idProducto, cantidad, total_linea, tipo) VALUES (' + idFactura + ',' + idVehiculo + ',' + cantidad + ',' + total_linea + ',"vehiculo") ', function (err, rows) {
+        con.query('INSERT INTO linea_factura (idFactura, idProducto, cantidad, total_linea, tipo) VALUES (' + idFactura + ',' + idVehiculo + ', -' + cantidad + ',- ' + total_linea + ',"vehiculo") ', function (err, rows) {
             if (err)
                 callback(err);
             callback(undefined, rows.insertId);
