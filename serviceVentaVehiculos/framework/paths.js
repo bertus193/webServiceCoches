@@ -158,7 +158,11 @@ app.put('/pedidoP', function (req, res) {
 //MODIFICAR (ACTUALIZA) STOCK FRANQUICIA (POST)
 app.post('/stock', function (req, res) {
 	var body = req.body;
-
+	stringified = JSON.stringify(body)
+	stringified = stringified.replace('"[', '[')
+	stringified = stringified.replace(']"', ']')
+	stringified = stringified.split('\\"').join('"');
+	body = JSON.parse(stringified)
 	var result = [];
 
 	(function next(i) {
@@ -171,7 +175,7 @@ app.post('/stock', function (req, res) {
 				if (err) {
 					res.send(err)
 				}
-				else if (vehiculo[0].cantidad == null) {
+				else if (vehiculo[0] == null) {
 					console.log("No existe el vehiculo " + body["vehiculos"][i]["idVehiculo"])
 					next(i + 1)
 				}

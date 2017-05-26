@@ -15,7 +15,7 @@ var franquicia = {
     getVehiculo(marca, modelo, callback) {
         var con = framework.getMysql().getCon();
         framework.getMysql().getFranquicia();
-        con.query('SELECT * FROM vehiculo WHERE marca = "' + marca + '" AND modelo = "' + modelo + '"', function (err, rows) {
+        con.query('SELECT * FROM vehiculo WHERE marca = "' + marca + '" AND modelo = "' + modelo + '" AND disponibilidad = "Venta"', function (err, rows) {
             if (err)
                 callback(err);
             callback(undefined, rows);
