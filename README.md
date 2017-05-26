@@ -1,20 +1,17 @@
 # webServiceCoches
-Proyecto de Integración Back End y Front End
+Proyecto de Integración Mule
 
-- serviceAlquilerVehiculos (Sergi)
-- serviceReparacionVehiculos (BPEL) (Mario)
-- serviceVentaVehiculos (REST) (Alberto)
+- serviceAlquilerVehiculos 
+- serviceReparacionVehiculos (BPEL)
+- serviceVentaVehiculos (REST)
 - serviceCompraVehiculosProveedor
 - serviceCompraPiezasProveedor
 - serviceGenerarFactura
-- serviceCliente (Jorge)
-  - listar()
-  - crear()
-  - buscar()
-
-
-- cliente (Jorge -)
-
+    - enviarFactura (REST)
+- serviceCliente
+- manageCompraVehiculosProveedor (BPEL)
+- cliente
+- franquiciamtis (Mule)
 
 ## Utilidades
 
