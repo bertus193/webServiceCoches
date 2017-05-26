@@ -84,7 +84,7 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
         </dw:transform-message>
         <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Pedido Franquicia BPEL"/>
         <set-variable variableName="salidaProveedor" value="#[message.payloadAs(java.lang.String)]" doc:name="salidaProveedor"/>
-        <set-variable variableName="stockVehiculo" value="[{ &quot;idVehiculo&quot;:&quot;#[flowVars.id]&quot; , &quot;cantidad&quot;:1}]" doc:name="Stock Vehiculo"/>
+        <set-variable variableName="stockVehiculo" value="{&quot;vehiculos&quot;: [{ &quot;idVehiculo&quot;:&quot;#[flowVars.id]&quot; , &quot;cantidad&quot;:1}]}" doc:name="Stock Vehiculo"/>
         <set-payload value="#[[&quot;data&quot;: flowVars.stockVehiculo]]" doc:name="Actualizar Stock franquicia Payload"/>
         <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="stockFranquicia+">
             <http:request-builder>
