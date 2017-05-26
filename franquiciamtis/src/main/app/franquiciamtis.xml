@@ -46,16 +46,24 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
             </http:request-builder>
         </http:request>
         <set-variable variableName="salida" value="#[message.payloadAs(java.lang.String)]" doc:name="salida"/>
-        <json:json-to-object-transformer returnClass="java.lang.Object" doc:name="JSON to Object"/>
-        <set-variable variableName="cantidad" value="#[message.payload[0].cantidad]" doc:name="cantidad"/>
-        <set-variable variableName="id" value="#[message.payload[0].cantidad]" doc:name="id"/>
-<logger message="Total: #[message.payload[0].cantidad]" level="INFO" doc:name="Logger"/>
+        <logger message="Salida: #[flowVars.salida]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
-            <when expression="#[flowVars.cantidad &lt;= 0]">
-                <flow-ref name="pedidoProveedor" doc:name="pedidoProveedor"/>
+            <when expression="#[flowVars.salida != &quot;No hay stock&quot;]">
+                <json:json-to-object-transformer returnClass="java.lang.Object" doc:name="JSON to Object"/>
+                <set-variable variableName="cantidad" value="#[message.payload[0].cantidad]" doc:name="cantidad"/>
+                <set-variable variableName="id" value="#[message.payload[0].id]" doc:name="id"/>
+                <logger message="Total: #[message.payload[0].cantidad]" level="INFO" doc:name="Logger"/>
+                <choice doc:name="Choice">
+                    <when expression="#[flowVars.cantidad &lt;= 0]">
+                        <flow-ref name="pedidoProveedor" doc:name="pedidoProveedor"/>
+                    </when>
+                    <otherwise>
+                        <set-payload value="#[message.payloadAs(java.lang.String)]" doc:name="Set Payload"/>
+                    </otherwise>
+                </choice>
             </when>
             <otherwise>
-                <set-payload value="#[message.payloadAs(java.lang.String)]" doc:name="Set Payload"/>
+                <set-payload value="#[flowVars.salida]" doc:name="Set Payload"/>
             </otherwise>
         </choice>
     </sub-flow>
@@ -76,24 +84,30 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
         </dw:transform-message>
         <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Pedido Franquicia BPEL"/>
         <set-variable variableName="salidaProveedor" value="#[message.payloadAs(java.lang.String)]" doc:name="salidaProveedor"/>
-        <set-payload value="{&quot;vehiculos&quot;: [{ &quot;id&quot;:&quot;#[flowVars.id]&quot; , &quot;cantidad&quot;:1}] }" doc:name="Actualizar Stock franquicia Payload"/>
-        <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="sumar a Franquicia">
+        <set-variable variableName="stockVehiculo" value="[{ &quot;idVehiculo&quot;:&quot;#[flowVars.id]&quot; , &quot;cantidad&quot;:1}]" doc:name="Stock Vehiculo"/>
+        <set-payload value="#[[&quot;vehiculos&quot;: flowVars.stockVehiculo]]" doc:name="Actualizar Stock franquicia Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="stockFranquicia+">
             <http:request-builder>
-                <http:header headerName="Content-Type" value="x-www-form-urlencoded"/>
+                <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
             </http:request-builder>
         </http:request>
         <set-payload value="#[flowVars.salidaProveedor]" doc:name="Set Payload"/>
     </sub-flow>
     <sub-flow name="comprarVehiculo">
     	<set-variable variableName="vehiculos" value="#[message.inboundProperties.'http.query.params'.idFactura]" doc:name="Variable"/>
-        <set-payload value="#[flowVars.vehiculos]" doc:name="Set Payload"/>
+        <set-payload value="#[['vehiculos' : flowVars.vehiculos]]" doc:name="Set Payload"/>
         
-        <http:request config-ref="HTTP_Request_Configuration" path="/pedido" method="PUT" doc:name="pedido Franquicia"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/pedido" method="PUT" doc:name="pedido Franquicia">
+           <http:request-builder>
+                <http:query-param paramName="idFactura" value="1"/>
+                <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
+            </http:request-builder>
+        </http:request>
         <set-variable variableName="idFactura" value="#[payload]" doc:name="Variable"/>
-        <set-payload value="#[flowVars.vehiculos]" doc:name="Set Payload"/>
+        <set-payload value="#[['vehiculos' : flowVars.vehiculos]]" doc:name="Set Payload"/>
         <http:request config-ref="HTTP_Request_Configuration" path="/stock" method="POST" doc:name="actualizar Stock Franquicia">
             <http:request-builder>
-                <http:header headerName="Content-Type" value="x-www-form-urlencoded"/>
+                <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
             </http:request-builder>
         </http:request>
     </sub-flow>
@@ -108,9 +122,9 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
         </http:request>
     </sub-flow>
     
-        <sub-flow name="flowObtenerVehiculosAlquiler">
+            <sub-flow name="flowObtenerVehiculosAlquiler">
         <dw:transform-message metadata:id="5f2c8e1e-55d7-4756-9589-9e538b2afe32" doc:name="Transform Message">
-            <dw:input-payload mimeType="application/json"/>
+             <dw:input-payload mimeType="application/json"/>
             <dw:set-payload><![CDATA[%dw 1.0
 %output application/xml
 %namespace ns0 http://www.example.org/AlquilerVehiculos/
@@ -123,8 +137,9 @@ http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/j
 	}
 }]]></dw:set-payload>
         </dw:transform-message>
+        <!--
         <ws:consumer config-ref="Web_Service_Consumer" operation="ObtenerVehiculos" doc:name="Web Service Consumer"/>
-        <dw:transform-message metadata:id="5526878d-d752-4532-8b2c-425d6cc92794" doc:name="Transform Message">
+        --><dw:transform-message metadata:id="5526878d-d752-4532-8b2c-425d6cc92794" doc:name="Transform Message">
             <dw:set-payload><![CDATA[%dw 1.0
 %output application/json
 %namespace ns0 http://www.example.org/AlquilerVehiculos/

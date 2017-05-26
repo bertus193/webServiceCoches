@@ -519,6 +519,397 @@
         <namespaceManager reference="../fields/org.mule.common.metadata.DefaultMetaDataField/model/model/namespaceManager"/>
       </org.mule.common.metadata.DefaultXmlMetaDataModel>
     </entry>
+    <entry>
+      <org.mule.common.metadata.DefaultMetaDataKey>
+        <id>manageCompraVehiculosProveedorRequest</id>
+        <displayName>manageCompraVehiculosProveedorRequest</displayName>
+        <category>DEFAULT</category>
+        <metaDataKeyPropertiesManager>
+          <properties>
+            <org.mule.common.metadata.key.property.dsql.DsqlFromMetaDataKeyProperty/>
+          </properties>
+        </metaDataKeyPropertiesManager>
+      </org.mule.common.metadata.DefaultMetaDataKey>
+      <org.mule.common.metadata.DefaultXmlMetaDataModel>
+        <dataType>XML</dataType>
+        <metaDataModelPropertiesManager>
+          <properties>
+            <org.mule.common.metadata.property.TextBasedExampleMetaDataModelProperty/>
+            <org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty/>
+            <org.mule.common.metadata.property.StructureIdentifierMetaDataModelProperty>
+              <metaDataKey class="org.mule.common.metadata.DefaultMetaDataKey" reference="../../../../../org.mule.common.metadata.DefaultMetaDataKey"/>
+              <derivedStructure>false</derivedStructure>
+              <generatedStructure>false</generatedStructure>
+            </org.mule.common.metadata.property.StructureIdentifierMetaDataModelProperty>
+          </properties>
+        </metaDataModelPropertiesManager>
+        <fields>
+          <org.mule.common.metadata.DefaultMetaDataField>
+            <name>ns0:vehiculos</name>
+            <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+              <dataType>STRING</dataType>
+              <metaDataModelPropertiesManager>
+                <properties>
+                  <org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty>
+                    <typeQName>
+                      <namespaceURI>http://www.w3.org/2001/XMLSchema</namespaceURI>
+                      <localPart>string</localPart>
+                      <prefix></prefix>
+                    </typeQName>
+                  </org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty>
+                </properties>
+              </metaDataModelPropertiesManager>
+            </model>
+            <accessType>READ_WRITE</accessType>
+            <metaDataFieldPropertyManager>
+              <properties>
+                <org.mule.common.metadata.property.QNameMetaDataProperty>
+                  <name>
+                    <namespaceURI>http://eclipse.org/bpel/sample</namespaceURI>
+                    <localPart>vehiculos</localPart>
+                    <prefix>ns0</prefix>
+                  </name>
+                </org.mule.common.metadata.property.QNameMetaDataProperty>
+              </properties>
+            </metaDataFieldPropertyManager>
+          </org.mule.common.metadata.DefaultMetaDataField>
+        </fields>
+        <rootElement>
+          <namespaceURI>http://eclipse.org/bpel/sample</namespaceURI>
+          <localPart>manageCompraVehiculosProveedorRequest</localPart>
+          <prefix>ns0</prefix>
+        </rootElement>
+        <schemas class="org.mule.common.metadata.StringBasedSchemaProvider">
+          <schemas>
+            <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;schema xmlns=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:http=&quot;http://schemas.xmlsoap.org/wsdl/http/&quot; xmlns:mime=&quot;http://schemas.xmlsoap.org/wsdl/mime/&quot; xmlns:plnk=&quot;http://docs.oasis-open.org/wsbpel/2.0/plnktype&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:soap12=&quot;http://schemas.xmlsoap.org/wsdl/soap12/&quot; xmlns:tns=&quot;http://eclipse.org/bpel/sample&quot; xmlns:vprop=&quot;http://docs.oasis-open.org/wsbpel/2.0/varprop&quot; xmlns:wsaw=&quot;http://www.w3.org/2006/05/addressing/wsdl&quot; xmlns:wsdl=&quot;http://www.example.org/CompraVehiculosProveedor/&quot; xmlns:wsdl1=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;qualified&quot; targetNamespace=&quot;http://eclipse.org/bpel/sample&quot;&gt;
+         &lt;element name=&quot;manageCompraVehiculosProveedorRequest&quot;&gt;
+            &lt;complexType&gt;
+               &lt;sequence&gt;
+                  &lt;element name=&quot;vehiculos&quot; type=&quot;string&quot;/&gt;
+               &lt;/sequence&gt;
+            &lt;/complexType&gt;
+         &lt;/element&gt;
+         &lt;element name=&quot;manageCompraVehiculosProveedorResponse&quot;&gt;
+            &lt;complexType&gt;
+               &lt;sequence&gt;
+                  &lt;element name=&quot;mensaje&quot; type=&quot;string&quot;/&gt;
+                  &lt;element name=&quot;devolver&quot; type=&quot;boolean&quot;/&gt;
+               &lt;/sequence&gt;
+            &lt;/complexType&gt;
+         &lt;/element&gt;
+      &lt;/schema&gt;</string>
+            <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:http=&quot;http://schemas.xmlsoap.org/wsdl/http/&quot; xmlns:mime=&quot;http://schemas.xmlsoap.org/wsdl/mime/&quot; xmlns:plnk=&quot;http://docs.oasis-open.org/wsbpel/2.0/plnktype&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:soap12=&quot;http://schemas.xmlsoap.org/wsdl/soap12/&quot; xmlns:tns=&quot;http://www.example.org/CompraVehiculosProveedor/&quot; xmlns:vprop=&quot;http://docs.oasis-open.org/wsbpel/2.0/varprop&quot; xmlns:wsaw=&quot;http://www.w3.org/2006/05/addressing/wsdl&quot; xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot; xmlns:wsdl1=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;unqualified&quot; targetNamespace=&quot;http://www.example.org/CompraVehiculosProveedor/&quot;&gt;
+         &lt;xsd:element name=&quot;actualizarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;actualizarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;mensaje&quot; type=&quot;xsd:string&quot;/&gt;
+                  &lt;xsd:element name=&quot;devolver&quot; type=&quot;xsd:boolean&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidad&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidadResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;total&quot; type=&quot;xsd:int&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:schema&gt;</string>
+            <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:http=&quot;http://schemas.xmlsoap.org/wsdl/http/&quot; xmlns:mime=&quot;http://schemas.xmlsoap.org/wsdl/mime/&quot; xmlns:plnk=&quot;http://docs.oasis-open.org/wsbpel/2.0/plnktype&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:soap12=&quot;http://schemas.xmlsoap.org/wsdl/soap12/&quot; xmlns:tns=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; xmlns:vprop=&quot;http://docs.oasis-open.org/wsbpel/2.0/varprop&quot; xmlns:wsaw=&quot;http://www.w3.org/2006/05/addressing/wsdl&quot; xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot; xmlns:wsdl1=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;unqualified&quot; targetNamespace=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot;&gt;
+         &lt;xsd:element name=&quot;actualizarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;actualizarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;mensaje&quot; type=&quot;xsd:string&quot;/&gt;
+                  &lt;xsd:element name=&quot;devolver&quot; type=&quot;xsd:boolean&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidad&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidadResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;total&quot; type=&quot;xsd:int&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:schema&gt;</string>
+          </schemas>
+          <encoding>UTF-8</encoding>
+          <baseUri>http://127.0.0.1:8080/ode/processes/manageCompraVehiculosProveedor?wsdl</baseUri>
+        </schemas>
+        <namespaceManager>
+          <namespacePrefix>
+            <entry>
+              <string>http://eclipse.org/bpel/sample</string>
+              <string>ns0</string>
+            </entry>
+          </namespacePrefix>
+        </namespaceManager>
+      </org.mule.common.metadata.DefaultXmlMetaDataModel>
+    </entry>
+    <entry>
+      <org.mule.common.metadata.DefaultMetaDataKey>
+        <id>manageCompraVehiculosProveedorResponse</id>
+        <displayName>manageCompraVehiculosProveedorResponse</displayName>
+        <category>DEFAULT</category>
+        <metaDataKeyPropertiesManager>
+          <properties>
+            <org.mule.common.metadata.key.property.dsql.DsqlFromMetaDataKeyProperty/>
+          </properties>
+        </metaDataKeyPropertiesManager>
+      </org.mule.common.metadata.DefaultMetaDataKey>
+      <org.mule.common.metadata.DefaultXmlMetaDataModel>
+        <dataType>XML</dataType>
+        <metaDataModelPropertiesManager>
+          <properties>
+            <org.mule.common.metadata.property.TextBasedExampleMetaDataModelProperty/>
+            <org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty/>
+            <org.mule.common.metadata.property.StructureIdentifierMetaDataModelProperty>
+              <metaDataKey class="org.mule.common.metadata.DefaultMetaDataKey" reference="../../../../../org.mule.common.metadata.DefaultMetaDataKey"/>
+              <derivedStructure>false</derivedStructure>
+              <generatedStructure>false</generatedStructure>
+            </org.mule.common.metadata.property.StructureIdentifierMetaDataModelProperty>
+          </properties>
+        </metaDataModelPropertiesManager>
+        <fields>
+          <org.mule.common.metadata.DefaultMetaDataField>
+            <name>ns0:mensaje</name>
+            <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+              <dataType>STRING</dataType>
+              <metaDataModelPropertiesManager>
+                <properties>
+                  <org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty>
+                    <typeQName reference="../../../../../../../../../entry[3]/org.mule.common.metadata.DefaultXmlMetaDataModel/fields/org.mule.common.metadata.DefaultMetaDataField/model/metaDataModelPropertiesManager/properties/org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty/typeQName"/>
+                  </org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty>
+                </properties>
+              </metaDataModelPropertiesManager>
+            </model>
+            <accessType>READ_WRITE</accessType>
+            <metaDataFieldPropertyManager>
+              <properties>
+                <org.mule.common.metadata.property.QNameMetaDataProperty>
+                  <name>
+                    <namespaceURI>http://eclipse.org/bpel/sample</namespaceURI>
+                    <localPart>mensaje</localPart>
+                    <prefix>ns0</prefix>
+                  </name>
+                </org.mule.common.metadata.property.QNameMetaDataProperty>
+              </properties>
+            </metaDataFieldPropertyManager>
+          </org.mule.common.metadata.DefaultMetaDataField>
+          <org.mule.common.metadata.DefaultMetaDataField>
+            <name>ns0:devolver</name>
+            <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+              <dataType>BOOLEAN</dataType>
+              <metaDataModelPropertiesManager>
+                <properties>
+                  <org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty>
+                    <typeQName>
+                      <namespaceURI>http://www.w3.org/2001/XMLSchema</namespaceURI>
+                      <localPart>boolean</localPart>
+                      <prefix></prefix>
+                    </typeQName>
+                  </org.mule.common.metadata.property.xml.SchemaTypeMetaDataProperty>
+                </properties>
+              </metaDataModelPropertiesManager>
+            </model>
+            <accessType>READ_WRITE</accessType>
+            <metaDataFieldPropertyManager>
+              <properties>
+                <org.mule.common.metadata.property.QNameMetaDataProperty>
+                  <name>
+                    <namespaceURI>http://eclipse.org/bpel/sample</namespaceURI>
+                    <localPart>devolver</localPart>
+                    <prefix>ns0</prefix>
+                  </name>
+                </org.mule.common.metadata.property.QNameMetaDataProperty>
+              </properties>
+            </metaDataFieldPropertyManager>
+          </org.mule.common.metadata.DefaultMetaDataField>
+        </fields>
+        <rootElement>
+          <namespaceURI>http://eclipse.org/bpel/sample</namespaceURI>
+          <localPart>manageCompraVehiculosProveedorResponse</localPart>
+          <prefix>ns0</prefix>
+        </rootElement>
+        <schemas class="org.mule.common.metadata.StringBasedSchemaProvider">
+          <schemas>
+            <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;schema xmlns=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:http=&quot;http://schemas.xmlsoap.org/wsdl/http/&quot; xmlns:mime=&quot;http://schemas.xmlsoap.org/wsdl/mime/&quot; xmlns:plnk=&quot;http://docs.oasis-open.org/wsbpel/2.0/plnktype&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:soap12=&quot;http://schemas.xmlsoap.org/wsdl/soap12/&quot; xmlns:tns=&quot;http://eclipse.org/bpel/sample&quot; xmlns:vprop=&quot;http://docs.oasis-open.org/wsbpel/2.0/varprop&quot; xmlns:wsaw=&quot;http://www.w3.org/2006/05/addressing/wsdl&quot; xmlns:wsdl=&quot;http://www.example.org/CompraVehiculosProveedor/&quot; xmlns:wsdl1=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;qualified&quot; targetNamespace=&quot;http://eclipse.org/bpel/sample&quot;&gt;
+         &lt;element name=&quot;manageCompraVehiculosProveedorRequest&quot;&gt;
+            &lt;complexType&gt;
+               &lt;sequence&gt;
+                  &lt;element name=&quot;vehiculos&quot; type=&quot;string&quot;/&gt;
+               &lt;/sequence&gt;
+            &lt;/complexType&gt;
+         &lt;/element&gt;
+         &lt;element name=&quot;manageCompraVehiculosProveedorResponse&quot;&gt;
+            &lt;complexType&gt;
+               &lt;sequence&gt;
+                  &lt;element name=&quot;mensaje&quot; type=&quot;string&quot;/&gt;
+                  &lt;element name=&quot;devolver&quot; type=&quot;boolean&quot;/&gt;
+               &lt;/sequence&gt;
+            &lt;/complexType&gt;
+         &lt;/element&gt;
+      &lt;/schema&gt;</string>
+            <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:http=&quot;http://schemas.xmlsoap.org/wsdl/http/&quot; xmlns:mime=&quot;http://schemas.xmlsoap.org/wsdl/mime/&quot; xmlns:plnk=&quot;http://docs.oasis-open.org/wsbpel/2.0/plnktype&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:soap12=&quot;http://schemas.xmlsoap.org/wsdl/soap12/&quot; xmlns:tns=&quot;http://www.example.org/CompraVehiculosProveedor/&quot; xmlns:vprop=&quot;http://docs.oasis-open.org/wsbpel/2.0/varprop&quot; xmlns:wsaw=&quot;http://www.w3.org/2006/05/addressing/wsdl&quot; xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot; xmlns:wsdl1=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;unqualified&quot; targetNamespace=&quot;http://www.example.org/CompraVehiculosProveedor/&quot;&gt;
+         &lt;xsd:element name=&quot;actualizarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;actualizarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;mensaje&quot; type=&quot;xsd:string&quot;/&gt;
+                  &lt;xsd:element name=&quot;devolver&quot; type=&quot;xsd:boolean&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidad&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidadResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;total&quot; type=&quot;xsd:int&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:schema&gt;</string>
+            <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:http=&quot;http://schemas.xmlsoap.org/wsdl/http/&quot; xmlns:mime=&quot;http://schemas.xmlsoap.org/wsdl/mime/&quot; xmlns:plnk=&quot;http://docs.oasis-open.org/wsbpel/2.0/plnktype&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:soap12=&quot;http://schemas.xmlsoap.org/wsdl/soap12/&quot; xmlns:tns=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; xmlns:vprop=&quot;http://docs.oasis-open.org/wsbpel/2.0/varprop&quot; xmlns:wsaw=&quot;http://www.w3.org/2006/05/addressing/wsdl&quot; xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot; xmlns:wsdl1=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;unqualified&quot; targetNamespace=&quot;http://www.example.org/CompraVehiculosProveedor2/&quot;&gt;
+         &lt;xsd:element name=&quot;actualizarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;actualizarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;mensaje&quot; type=&quot;xsd:string&quot;/&gt;
+                  &lt;xsd:element name=&quot;devolver&quot; type=&quot;xsd:boolean&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStock&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;comprobarStockResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidad&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;vehiculos&quot; type=&quot;xsd:string&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+         &lt;xsd:element name=&quot;sumarCantidadResponse&quot;&gt;
+            &lt;xsd:complexType&gt;
+               &lt;xsd:sequence&gt;
+                  &lt;xsd:element name=&quot;total&quot; type=&quot;xsd:int&quot;/&gt;
+               &lt;/xsd:sequence&gt;
+            &lt;/xsd:complexType&gt;
+         &lt;/xsd:element&gt;
+      &lt;/xsd:schema&gt;</string>
+          </schemas>
+          <encoding reference="../../../../entry[3]/org.mule.common.metadata.DefaultXmlMetaDataModel/schemas/encoding"/>
+          <baseUri>http://127.0.0.1:8080/ode/processes/manageCompraVehiculosProveedor?wsdl</baseUri>
+        </schemas>
+        <namespaceManager>
+          <namespacePrefix>
+            <entry>
+              <string>http://eclipse.org/bpel/sample</string>
+              <string>ns0</string>
+            </entry>
+          </namespacePrefix>
+        </namespaceManager>
+      </org.mule.common.metadata.DefaultXmlMetaDataModel>
+    </entry>
   </types>
   <connectorName>Web_Service_Consumer</connectorName>
 </metadata__catalog__entry>

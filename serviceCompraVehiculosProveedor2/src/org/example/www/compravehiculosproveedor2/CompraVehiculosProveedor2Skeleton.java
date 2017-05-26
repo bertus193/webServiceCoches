@@ -84,13 +84,14 @@ public class CompraVehiculosProveedor2Skeleton{
         
         for(int i = 0; i< arr.length(); i++){       
 	       	try {
-	 			PreparedStatement prepStmt = con.prepareStatement("SELECT id, cantidad FROM vehiculo where id = ? LIMIT 1");
+	 			PreparedStatement prepStmt = con.prepareStatement("SELECT id, precio, cantidad FROM vehiculo where id = ? LIMIT 1");
 	 			prepStmt.setString(1, arr.getJSONObject(i).getString("id"));
 	 			ResultSet rs = prepStmt.executeQuery();
 	 			if(rs.next()){
 	 				jo = new JSONObject();
 	 				jo.put("id", rs.getString("id"));
-	 				jo.put("cantidad", rs.getInt("cantidad"));
+	 				jo.put("precio", rs.getFloat("precio"));
+	 				jo.put("cantidad", arr.getJSONObject(i).getInt("cantidad"));
 	 				ja.put(jo);
 	 			}	 			
 	 		} catch (SQLException e) {
@@ -115,16 +116,15 @@ public class CompraVehiculosProveedor2Skeleton{
     public org.example.www.compravehiculosproveedor2.SumarCantidadResponse sumarCantidad(org.example.www.compravehiculosproveedor2.SumarCantidad sumarCantidad)
     {
     	SumarCantidadResponse salida = new SumarCantidadResponse();	
-    	int cantidad = 0;
+    	float cantidad = 0;
     	
     	JSONObject obj = new JSONObject(sumarCantidad.getVehiculos());
     	JSONArray arr = obj.getJSONArray("vehiculos");
     	
     	for(int i = 0; i< arr.length();i++){
-    		cantidad = cantidad + arr.getJSONObject(i).getInt("cantidad");
-    	}
-    	    	
-    	salida.setTotal(cantidad);
+    		cantidad = cantidad + (arr.getJSONObject(i).getFloat("precio") * arr.getJSONObject(i).getFloat("cantidad"));
+    	}  	
+    	salida.setTotal((int)(Math.round(cantidad)));
     	return salida;
     }
 
