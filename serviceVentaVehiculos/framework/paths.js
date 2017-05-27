@@ -76,7 +76,6 @@ app.put('/pedido', function (req, res) {
 		else {
 			(function next(i) {
 				if (i == body["data"]["vehiculos"].length) {
-					console.log((idInsert).toString());
 					res.send((idInsert).toString())
 					//res.contentType('application/json');
 					//result.push({ idFactura: idInsert })
@@ -248,7 +247,6 @@ app.post('/stockP', function (req, res) {
 //GENERA FACTURA (PUT)
 app.put('/factura/', function (req, res) {
 	var idFactura = req.body.idFactura
-	console.log(req.body)
 
 	framework.getFranquicia().getFactura(idFactura, function (err, factura) {
 		if (err) {
